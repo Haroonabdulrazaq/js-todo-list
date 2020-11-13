@@ -21,9 +21,9 @@ const helpr = (() => {
     return res;
   };
 
-  const createTag = (el, className='') =>{
+  const createTag = (el, className = '') => {
     const tag = document.createElement(el);
-    if(className != ''){
+    if (className != '') {
       tag.setAttribute('class', className);
     }
     return tag;
@@ -43,9 +43,9 @@ const newTask = (title, description = '', dueDate = '', priority = '', completed
 })
 
 // title (str), tasks (array)
-const newProject = (title, tasks) => ({
+const newProject = (title) => ({
   title: title,
-  tasks: tasks
+  tasks: []
 })
 
 // list containing projects
@@ -66,24 +66,28 @@ const displayProject = (project) => {
   textIn.setAttribute('type', 'text')
 
 
-  let taskSubmit = helpr.createTag('input','task-submit')
+  let taskSubmit = helpr.createTag('input', 'task-submit')
   taskSubmit.setAttribute('type', 'submit')
   taskSubmit.setAttribute('value', 'Add Task')
+
   helpr.addChildren(taskForm, [textIn, taskSubmit])
   helpr.addChildren(taskDiv, [taskList, taskForm])
   helpr.addChildren(projDiv, [projectTitle, taskDiv])
   projectList.appendChild(projDiv)
+
+  taskSubmit.onclick = function () {
+    const tasks = this.parentNode.parentNode.firstChild
+    const taskInput = this.parentNode.firstChild.value
+
+    if (taskInput.length != '') {
+      const task = newTask(taskInput)
+      project.tasks.push(task)
+      console.log(project)
+    }
+  }
 }
 
-const addTask =()=>{
-  taskSubmit = document.querySelector('.task-submit')
 
-  taskSubmit.addEventListener('click', (e)=>{
-    e.preventDefault()
-    console.log("hello")
-
-  })
-}
 
 
 // module structure: tasks, projects, UI
