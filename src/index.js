@@ -22,11 +22,11 @@ const helpr = (() => {
   };
 
   const createTag = (el, className = '') => {
-    const tag = document.createElement(el);
+    const res = document.createElement(el);
     if (className != '') {
-      tag.setAttribute('class', className);
+      res.setAttribute('class', className);
     }
-    return tag;
+    return res;
   }
 
   return { addChildren, textEl, classyDiv, createTag };
@@ -59,7 +59,6 @@ const displayProject = (project) => {
   const projectTitle = helpr.textEl('h3', project.title)
   const taskList = helpr.createTag('ul', 'task-list')
   const taskDiv = document.createElement('div')
-
 
   const taskForm = document.createElement('form')
   let textIn = document.createElement('input')
