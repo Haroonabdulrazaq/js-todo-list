@@ -56,7 +56,14 @@ const projectList = document.querySelector('.project-list')
 
 const displayProject = (project) => {
   const projDiv = helpr.classyDiv('project')
+
+  // TEMP: for delete fn
+  const idx = projects.indexOf(project)
+  projDiv.setAttribute('p-index', idx)
+
   const projectTitle = helpr.textEl('h3', project.title)
+  const projectDel = helpr.createTag('button', 'del-project')
+  projectDel.innerHTML = 'Delete Project'
   const taskList = helpr.createTag('ul', 'task-list')
   const taskDiv = document.createElement('div')
 
@@ -71,7 +78,7 @@ const displayProject = (project) => {
 
   helpr.addChildren(taskForm, [textIn, taskSubmit])
   helpr.addChildren(taskDiv, [taskList, taskForm])
-  helpr.addChildren(projDiv, [projectTitle, taskDiv])
+  helpr.addChildren(projDiv, [projectTitle, projectDel, taskDiv])
   projectList.appendChild(projDiv)
 
   taskSubmit.onclick = function () {
@@ -84,6 +91,7 @@ const displayProject = (project) => {
     }
 
     if (project.tasks.length > 0) {
+      taskList.innerHTML = ''
       project.tasks.forEach((el) => {
         const taskItem = helpr.createTag('li')
         const taskDiv = helpr.classyDiv('task-div')
@@ -95,8 +103,6 @@ const displayProject = (project) => {
     }
   }
 }
-
-
 
 
 // module structure: tasks, projects, UI
@@ -124,6 +130,7 @@ createProject.addEventListener('click', (e) => {
     let p = newProject(projectName)
     projects.push(p)
 
+    document.querySelector('.project-list').innerHTML = ''
     projects.forEach(displayProject)
     // for (let i = 0; i < projects.length; i++) {
     //   displayProject(projects[i])
@@ -131,6 +138,20 @@ createProject.addEventListener('click', (e) => {
   }
 })
 
+// const demoProj = newProject('Project 1')
+// projects.push(demoProj)
+
+// projects.forEach(displayProject)
+
+document.querySelector('.project-list').addEventListener('click', function (e) {
+  if (e.target && e.target.matches('button.del-project')) {
+    const delIndx = e.target.parentNode.getAttribute('p-index')
+    console.log(delIndx)
+    projects.splice(delIndx, 1)
+    document.querySelector('.project-list').innerHTML = ''
+    projects.forEach(displayProject)
+  }
+})
 
 
 /* task CRUD
