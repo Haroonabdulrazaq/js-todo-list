@@ -1,0 +1,1 @@
+(()=>{const e=[],t=document.querySelector(".add-project"),c=document.querySelector(".new-project-form");t.addEventListener("click",(()=>{c.classList.toggle("hide")})),document.querySelector(".create-project-btn").addEventListener("click",(t=>{const c=document.querySelector(".new-project-name").value;c.length>0&&(e.push(c),console.log(e))}))})();
