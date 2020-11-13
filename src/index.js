@@ -87,8 +87,11 @@ const displayProject = (project) => {
     if (project.tasks.length > 0) {
       project.tasks.forEach((el) => {
         const taskItem = helpr.createTag('li')
-        taskItem.innerHTML = el.title
-        taskList.appendChild(taskItem)
+        const taskDiv = helpr.classyDiv('task-div')
+        const taskTitle = helpr.textEl('p', el.title)
+        helpr.addChildren(taskDiv, [taskTitle])
+
+        taskList.appendChild(taskDiv)
       })
     }
   }
