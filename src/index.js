@@ -21,7 +21,15 @@ const helpr = (() => {
     return res;
   };
 
-  return { addChildren, textEl, classyDiv };
+  const createTag = (el, className='') =>{
+    const tag = document.createElement(el);
+    if(className != ''){
+      tag.setAttribute('class', className);
+    }
+    return tag;
+  }
+
+  return { addChildren, textEl, classyDiv, createTag };
 })();
 
 
@@ -47,21 +55,35 @@ const projectList = document.querySelector('.project-list')
 // DOM manipulation
 
 const displayProject = (project) => {
-  const p = helpr.classyDiv('project')
+  const projDiv = helpr.classyDiv('project')
   const projectTitle = helpr.textEl('h3', project.title)
-  const taskList = document.createElement('ul')
+  const taskList = helpr.createTag('ul', 'task-list')
+  const taskDiv = document.createElement('div')
+
+
   const taskForm = document.createElement('form')
   let textIn = document.createElement('input')
   textIn.setAttribute('type', 'text')
-  let formSub = document.createElement('input')
-  formSub.setAttribute('type', 'submit')
-  formSub.setAttribute('value', 'Add Task')
-  helpr.addChildren(taskForm, [textIn, formSub])
-  helpr.addChildren(p, [projectTitle, taskList, taskForm])
-  projectList.appendChild(p)
+
+
+  let taskSubmit = helpr.createTag('input','task-submit')
+  taskSubmit.setAttribute('type', 'submit')
+  taskSubmit.setAttribute('value', 'Add Task')
+  helpr.addChildren(taskForm, [textIn, taskSubmit])
+  helpr.addChildren(taskDiv, [taskList, taskForm])
+  helpr.addChildren(projDiv, [projectTitle, taskDiv])
+  projectList.appendChild(projDiv)
 }
 
+const addTask =()=>{
+  taskSubmit = document.querySelector('.task-submit')
 
+  taskSubmit.addEventListener('click', (e)=>{
+    e.preventDefault()
+    console.log("hello")
+
+  })
+}
 
 
 // module structure: tasks, projects, UI

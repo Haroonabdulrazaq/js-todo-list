@@ -19,7 +19,14 @@ const helpr = (() => {
     return res;
   };
 
-  return { addChildren, textEl, classyDiv };
+  const createTag = (el, className) =>{
+    const tag = document.createElement(el);
+    tag.setAttribute('class', className);
+
+    return tag;
+  }
+
+  return { addChildren, textEl, classyDiv, createTag };
 })();
 
 export default helpr;
