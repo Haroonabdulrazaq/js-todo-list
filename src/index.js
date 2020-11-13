@@ -82,7 +82,14 @@ const displayProject = (project) => {
     if (taskInput.length != '') {
       const task = newTask(taskInput)
       project.tasks.push(task)
-      console.log(project)
+    }
+
+    if (project.tasks.length > 0) {
+      project.tasks.forEach((el) => {
+        const taskItem = helpr.createTag('li')
+        taskItem.innerHTML = el.title
+        taskList.appendChild(taskItem)
+      })
     }
   }
 }
