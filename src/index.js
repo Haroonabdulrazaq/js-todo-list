@@ -69,7 +69,7 @@ const displayProject = (project) => {
   projectEdit.innerHTML = 'Edit'
 
   const editInput = helpr.createTag('input', 'edit-input')
-   editInput.classList.add('hide')
+  editInput.classList.add('hide')
 
   const taskList = helpr.createTag('ul', 'task-list')
   const taskDiv = document.createElement('div')
@@ -85,7 +85,7 @@ const displayProject = (project) => {
 
   helpr.addChildren(taskForm, [textIn, taskSubmit])
   helpr.addChildren(taskDiv, [taskList, taskForm])
-  helpr.addChildren(projDiv, [projectTitle,  editInput, projectDel, projectEdit, taskDiv])
+  helpr.addChildren(projDiv, [projectTitle, editInput, projectDel, projectEdit, taskDiv])
   projectList.appendChild(projDiv)
 
 }
@@ -137,12 +137,22 @@ document.querySelector('.project-list').addEventListener('click', function (e) {
   }
 
   //Edit Button
-  if (e.target && e.target.matches('button.edit-project')){
+  if (e.target && e.target.matches('button.edit-project')) {
     const editInput = e.target.parentNode.querySelector('.edit-input')
     const projectIndx = e.target.parentNode.getAttribute('p-index')
     editInput.classList.toggle('hide')
-    console.log(projects[projectIndx])
+
+    if (!editInput.classList.contains('hide')) {
+      document.querySelector('.project-list').addEventListener('keyup', function (k) {
+        k.preventDefault();
+        if (k.keyCode === 13) {
+          console.log('enter')
+        }
+      })
+    }
   }
+
+
 
   // submit button
 
