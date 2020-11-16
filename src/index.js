@@ -81,27 +81,6 @@ const displayProject = (project) => {
   helpr.addChildren(projDiv, [projectTitle, projectDel, taskDiv])
   projectList.appendChild(projDiv)
 
-  // taskSubmit.onclick = function () {
-  //   const tasks = this.parentNode.parentNode.firstChild
-  //   const taskInput = this.parentNode.firstChild.value
-
-  //   if (taskInput.length != '') {
-  //     const task = newTask(taskInput)
-  //     project.tasks.push(task)
-  //   }
-
-  //   if (project.tasks.length > 0) {
-  //     taskList.innerHTML = ''
-  //     project.tasks.forEach((el) => {
-  //       const taskItem = helpr.createTag('li')
-  //       const taskDiv = helpr.classyDiv('task-div')
-  //       const taskTitle = helpr.textEl('p', el.title)
-  //       helpr.addChildren(taskDiv, [taskTitle])
-
-  //       taskList.appendChild(taskDiv)
-  //     })
-  //   }
-  // }
 }
 
 
@@ -132,9 +111,6 @@ createProject.addEventListener('click', (e) => {
 
     document.querySelector('.project-list').innerHTML = ''
     projects.forEach(displayProject)
-    // for (let i = 0; i < projects.length; i++) {
-    //   displayProject(projects[i])
-    // }
   }
 })
 
