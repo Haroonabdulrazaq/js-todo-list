@@ -118,6 +118,8 @@ createProject.addEventListener('click', (e) => {
 
 document.querySelector('.project-list').addEventListener('click', function (e) {
 
+  // TODO : renderTasks function
+
   // delete button
 
   if (e.target && e.target.matches('button.del-project')) {
@@ -137,7 +139,6 @@ document.querySelector('.project-list').addEventListener('click', function (e) {
     const projIndx = e.target.parentNode.parentNode.parentNode.getAttribute('p-index')
     const project = projects[projIndx]
 
-
     if (taskInput.length != '') {
       const task = newTask(taskInput)
       project.tasks.push(task)
@@ -150,7 +151,7 @@ document.querySelector('.project-list').addEventListener('click', function (e) {
         const taskDiv = helpr.classyDiv('task-div')
         const indx = project.tasks.indexOf(el)
 
-         taskDiv.setAttribute('t-index', indx)
+        taskDiv.setAttribute('t-index', indx)
         const taskTitle = helpr.textEl('p', el.title)
         const taskDel = helpr.createTag('button', 'task-del')
         taskDel.innerHTML = 'Delete Task'
@@ -161,11 +162,14 @@ document.querySelector('.project-list').addEventListener('click', function (e) {
     }
   }
 
-  if(e.target && e.target.matches('button.task-del')) {
+  if (e.target && e.target.matches('button.task-del')) {
     const taskIndex = e.target.parentNode.getAttribute('t-index')
+    const taskList = e.target.parentNode.parentNode.firstChild
+    const taskItem = e.target.parentNode.parentNode
     const projIndex = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('p-index')
-    projects[projIndex].tasks.splice(taskIndex, 1)
-
+    const project = projects[projIndex]
+    project.tasks.splice(taskIndex, 1)
+    taskItem.remove()
   }
 })
 
