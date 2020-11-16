@@ -81,27 +81,27 @@ const displayProject = (project) => {
   helpr.addChildren(projDiv, [projectTitle, projectDel, taskDiv])
   projectList.appendChild(projDiv)
 
-  taskSubmit.onclick = function () {
-    const tasks = this.parentNode.parentNode.firstChild
-    const taskInput = this.parentNode.firstChild.value
+  // taskSubmit.onclick = function () {
+  //   const tasks = this.parentNode.parentNode.firstChild
+  //   const taskInput = this.parentNode.firstChild.value
 
-    if (taskInput.length != '') {
-      const task = newTask(taskInput)
-      project.tasks.push(task)
-    }
+  //   if (taskInput.length != '') {
+  //     const task = newTask(taskInput)
+  //     project.tasks.push(task)
+  //   }
 
-    if (project.tasks.length > 0) {
-      taskList.innerHTML = ''
-      project.tasks.forEach((el) => {
-        const taskItem = helpr.createTag('li')
-        const taskDiv = helpr.classyDiv('task-div')
-        const taskTitle = helpr.textEl('p', el.title)
-        helpr.addChildren(taskDiv, [taskTitle])
+  //   if (project.tasks.length > 0) {
+  //     taskList.innerHTML = ''
+  //     project.tasks.forEach((el) => {
+  //       const taskItem = helpr.createTag('li')
+  //       const taskDiv = helpr.classyDiv('task-div')
+  //       const taskTitle = helpr.textEl('p', el.title)
+  //       helpr.addChildren(taskDiv, [taskTitle])
 
-        taskList.appendChild(taskDiv)
-      })
-    }
-  }
+  //       taskList.appendChild(taskDiv)
+  //     })
+  //   }
+  // }
 }
 
 
@@ -138,18 +138,46 @@ createProject.addEventListener('click', (e) => {
   }
 })
 
-// const demoProj = newProject('Project 1')
-// projects.push(demoProj)
 
-// projects.forEach(displayProject)
 
 document.querySelector('.project-list').addEventListener('click', function (e) {
+
+  // delete button
+
   if (e.target && e.target.matches('button.del-project')) {
     const delIndx = e.target.parentNode.getAttribute('p-index')
-    console.log(delIndx)
     projects.splice(delIndx, 1)
     document.querySelector('.project-list').innerHTML = ''
     projects.forEach(displayProject)
+  }
+
+  // submit button
+
+  if (e.target && e.target.matches('input.task-submit')) {
+
+    const tasks = e.target.parentNode.parentNode.firstChild
+    const taskInput = e.target.parentNode.firstChild.value
+    const taskList = e.target.parentNode.parentNode.firstChild // selects .task-list
+    const projIndx = e.target.parentNode.parentNode.parentNode.getAttribute('p-index')
+    const project = projects[projIndx]
+
+
+    if (taskInput.length != '') {
+      const task = newTask(taskInput)
+      project.tasks.push(task)
+    }
+
+    if (project.tasks.length > 0) {
+      console.log(project.tasks)
+      taskList.innerHTML = ''
+      project.tasks.forEach((el) => {
+        const taskItem = helpr.createTag('li')
+        const taskDiv = helpr.classyDiv('task-div')
+        const taskTitle = helpr.textEl('p', el.title)
+        helpr.addChildren(taskDiv, [taskTitle])
+        taskList.appendChild(taskDiv)
+      })
+    }
   }
 })
 
@@ -161,3 +189,10 @@ document.querySelector('.project-list').addEventListener('click', function (e) {
   show/hide update form
   update task (form)
 */
+
+// development data
+
+const demoProj = newProject('Project 1')
+projects.push(demoProj)
+
+projects.forEach(displayProject)
