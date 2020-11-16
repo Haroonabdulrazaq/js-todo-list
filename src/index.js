@@ -144,16 +144,28 @@ document.querySelector('.project-list').addEventListener('click', function (e) {
     }
 
     if (project.tasks.length > 0) {
-      console.log(project.tasks)
       taskList.innerHTML = ''
       project.tasks.forEach((el) => {
         const taskItem = helpr.createTag('li')
         const taskDiv = helpr.classyDiv('task-div')
+        const indx = project.tasks.indexOf(el)
+
+         taskDiv.setAttribute('t-index', indx)
         const taskTitle = helpr.textEl('p', el.title)
-        helpr.addChildren(taskDiv, [taskTitle])
-        taskList.appendChild(taskDiv)
+        const taskDel = helpr.createTag('button', 'task-del')
+        taskDel.innerHTML = 'Delete Task'
+        helpr.addChildren(taskDiv, [taskTitle, taskDel])
+        taskItem.appendChild(taskDiv)
+        taskList.appendChild(taskItem)
       })
     }
+  }
+
+  if(e.target && e.target.matches('button.task-del')) {
+    const taskIndex = e.target.parentNode.getAttribute('t-index')
+    const projIndex = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('p-index')
+    projects[projIndex].tasks.splice(taskIndex, 1)
+
   }
 })
 
@@ -170,5 +182,9 @@ document.querySelector('.project-list').addEventListener('click', function (e) {
 
 const demoProj = newProject('Project 1')
 projects.push(demoProj)
+
+// const demotask = newTask('task 1')
+// demoProj.tasks.push(demotask)
+
 
 projects.forEach(displayProject)
