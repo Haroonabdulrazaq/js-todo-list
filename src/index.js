@@ -64,6 +64,13 @@ const displayProject = (project) => {
   const projectTitle = helpr.textEl('h3', project.title)
   const projectDel = helpr.createTag('button', 'del-project')
   projectDel.innerHTML = 'Delete Project'
+
+  const projectEdit = helpr.createTag('button', 'edit-project')
+  projectEdit.innerHTML = 'Edit'
+
+  const editInput = helpr.createTag('input', 'edit-input')
+   editInput.classList.add('hide')
+
   const taskList = helpr.createTag('ul', 'task-list')
   const taskDiv = document.createElement('div')
 
@@ -78,7 +85,7 @@ const displayProject = (project) => {
 
   helpr.addChildren(taskForm, [textIn, taskSubmit])
   helpr.addChildren(taskDiv, [taskList, taskForm])
-  helpr.addChildren(projDiv, [projectTitle, projectDel, taskDiv])
+  helpr.addChildren(projDiv, [projectTitle,  editInput, projectDel, projectEdit, taskDiv])
   projectList.appendChild(projDiv)
 
 }
@@ -127,6 +134,14 @@ document.querySelector('.project-list').addEventListener('click', function (e) {
     projects.splice(delIndx, 1)
     document.querySelector('.project-list').innerHTML = ''
     projects.forEach(displayProject)
+  }
+
+  //Edit Button
+  if (e.target && e.target.matches('button.edit-project')){
+    const editInput = e.target.parentNode.querySelector('.edit-input')
+    const projectIndx = e.target.parentNode.getAttribute('p-index')
+    editInput.classList.toggle('hide')
+    console.log(projects[projectIndx])
   }
 
   // submit button
