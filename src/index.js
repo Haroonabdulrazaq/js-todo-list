@@ -256,6 +256,15 @@ document.querySelector('main').addEventListener('click', function (e) {
       
     })
   }
+   const taskTextarea = document.querySelector('.task-textarea')
+   if(e.target && e.target.matches('.task-textarea')){
+    document.querySelector('main').addEventListener('keyup', function (k) {
+      k.preventDefault();
+      if(k.keyCode === 13 && taskTextarea.value.length > 0){
+        console.log("Hello description")
+      }
+    })
+   }
 
   
 })
