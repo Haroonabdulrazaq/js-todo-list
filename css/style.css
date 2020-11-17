@@ -18,3 +18,7 @@
 .edit-task .task-description, .edit-task .task-priority {
   margin-bottom: 20px;
 }
+
+.edit-task .close-edit:hover {
+  cursor: pointer;
+}

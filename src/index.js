@@ -167,7 +167,7 @@ document.querySelector('main').addEventListener('click', function (e) {
     if (!editInput.classList.contains('hide')) {
       document.querySelector('.project-list').addEventListener('keyup', function (k) {
         k.preventDefault();
-        if (k.keyCode === 13 && editInput.value.length > 0) {
+        if (k.key === 'Enter' && editInput.value.length > 0) {
           projects[projectIndx].title = editInput.value
 
           showProjects()
@@ -210,6 +210,8 @@ document.querySelector('main').addEventListener('click', function (e) {
   const taskModal = document.querySelector('.edit-task')
 
 
+  // show/hide task modal
+
   if (e.target && e.target.matches('.task-div p')) {
     const taskIndex = e.target.parentNode.getAttribute('t-index')
     const projIndex = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('p-index')
@@ -232,6 +234,10 @@ document.querySelector('main').addEventListener('click', function (e) {
   }
 
 
+  // TODO: refactor const getTaskIndx = () => {
+
+  // }
+
 
   let taskInput = document.querySelector('.task-title input')
 
@@ -239,11 +245,13 @@ document.querySelector('main').addEventListener('click', function (e) {
     taskInput.classList.remove('hide')
   }
 
+  // set task title
+
   if (!taskInput.classList.contains('hide')) {
     document.querySelector('main').addEventListener('keyup', function (k) {
       k.preventDefault();
       newTaskTitle = taskInput.value
-      if (k.keyCode === 13 && taskInput.value.length > 0) {
+      if (k.key === 'Enter' && taskInput.value.length > 0) {
         const taskIndicies = taskModal.getAttribute('pt-indices').split(',').map(Number)
         let [projIndex, taskIndex] = [...taskIndicies]
         projects[projIndex]["tasks"][taskIndex].title = newTaskTitle
@@ -260,13 +268,15 @@ document.querySelector('main').addEventListener('click', function (e) {
     })
   }
 
+  // set task description
+
   const taskTextArea = document.querySelector('.task-textarea')
 
   if (e.target && e.target.matches('.task-textarea')) {
     document.querySelector('main').addEventListener('keyup', function (k) {
       k.preventDefault();
       // TODO: change from enter or key-up to button
-      if (k.keyCode === 13 && taskTextArea.value.length > 0) {
+      if (k.key === 'Enter' && taskTextArea.value.length > 0) {
         const taskIndicies = taskModal.getAttribute('pt-indices').split(',').map(Number)
         let [projIndex, taskIndex] = [...taskIndicies]
 
@@ -280,10 +290,27 @@ document.querySelector('main').addEventListener('click', function (e) {
     })
   }
 
+  // show/hide task-description input
+
   if (e.target && e.target.matches('.task-description p')) {
     taskTextArea.classList.toggle('hide')
   }
 
+  // set task-priority
+
+  if (e.target && e.target.matches('.task-priority input[name="taskPriority"]')) {
+    const taskIndicies = taskModal.getAttribute('pt-indices').split(',').map(Number)
+    let [projIndex, taskIndex] = [...taskIndicies]
+
+    projects[projIndex]["tasks"][taskIndex].priority = e.target.value
+  }
+
+  // close task edit
+
+  if (e.target && e.target.matches('.close-edit i')) {
+    taskModal.classList.toggle('hide')
+
+  }
 
 
 })
