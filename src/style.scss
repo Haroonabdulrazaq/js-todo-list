@@ -2,6 +2,21 @@
   display: none;
 }
 
+.task-div {
+  display: flex;  
+  margin: 10px auto;
+  justify-content: flex-start;
+  align-items: center;
+
+  * {
+    margin-right: 20px;
+  }
+
+  p {
+    width: 250px;
+  }
+}
+
 .edit-task {
   position: fixed;
   margin: 0 auto; 

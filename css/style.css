@@ -2,6 +2,27 @@
   display: none;
 }
 
+.task-div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 10px auto;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.task-div * {
+  margin-right: 20px;
+}
+
+.task-div p {
+  width: 250px;
+}
+
 .edit-task {
   position: fixed;
   margin: 0 auto;
