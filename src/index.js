@@ -92,13 +92,17 @@ const displayProject = (project) => {
   project.tasks.forEach((el) => {
     const taskItem = helpr.createTag('li')
     const taskDiv = helpr.classyDiv('task-div')
+
+    const taskCheckbox = helpr.createTag('input', 'task-checkbox')
+    taskCheckbox.setAttribute('type', 'checkbox')
+    
     const indx = project.tasks.indexOf(el)
 
     taskDiv.setAttribute('t-index', indx)
     const taskTitle = helpr.textEl('p', el.title)
     const taskDel = helpr.createTag('button', 'task-del')
     taskDel.innerHTML = 'Delete Task'
-    helpr.addChildren(taskDiv, [taskTitle, taskDel])
+    helpr.addChildren(taskDiv, [taskCheckbox, taskTitle, taskDel])
     taskItem.appendChild(taskDiv)
     taskList.appendChild(taskItem)
   })
@@ -150,6 +154,13 @@ document.querySelector('main').addEventListener('click', function (e) {
   // TODO : renderTasks function
 
   // delete project button
+
+  if(e.target && e.target.matches('.task-checkbox')){
+    // setTaskValue('completed', checked.value)
+    const taskIndex = e.target.parentNode.getAttribute('t-index')
+    const projIndex = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('p-index')
+    projects[projIndex]["tasks"][taskIndex].completed = e.target.checked
+  }
 
   if (e.target && e.target.matches('button.del-project')) {
     const delIndx = e.target.parentNode.getAttribute('p-index')
