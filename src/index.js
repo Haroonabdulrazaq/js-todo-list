@@ -256,12 +256,21 @@ document.querySelector('main').addEventListener('click', function (e) {
       
     })
   }
-   const taskTextarea = document.querySelector('.task-textarea')
+   const taskTextArea = document.querySelector('.task-textarea')
    if(e.target && e.target.matches('.task-textarea')){
     document.querySelector('main').addEventListener('keyup', function (k) {
       k.preventDefault();
-      if(k.keyCode === 13 && taskTextarea.value.length > 0){
-        console.log("Hello description")
+      if(k.keyCode === 13 && taskTextArea.value.length > 0){
+        const taskIndicies = taskModal.getAttribute('pt-indices').split(',')
+        let [projIndex, taskIndex] =  [...taskIndicies]
+        projIndex = parseInt(projIndex)
+        taskIndex = parseInt(taskIndex)
+        projects[projIndex]["tasks"][taskIndex].description = taskTextArea.value
+        let taskDescription = document.querySelector('.task-description p') 
+        taskDescription.innerHTML = taskTextArea.value
+
+        taskTextArea.classList.add('hide')
+        showProjects()
       }
     })
    }
