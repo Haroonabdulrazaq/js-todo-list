@@ -149,7 +149,7 @@ document.querySelector('.project-list').addEventListener('click', function (e) {
 
   // TODO : renderTasks function
 
-  // delete button
+  // delete project button
 
   if (e.target && e.target.matches('button.del-project')) {
     const delIndx = e.target.parentNode.getAttribute('p-index')
@@ -158,7 +158,7 @@ document.querySelector('.project-list').addEventListener('click', function (e) {
     projects.forEach(displayProject)
   }
 
-  //Edit Button
+  // edit project button
   if (e.target && e.target.matches('button.edit-project')) {
     const editInput = e.target.parentNode.querySelector('.edit-input')
     const projectIndx = e.target.parentNode.getAttribute('p-index')
@@ -178,7 +178,8 @@ document.querySelector('.project-list').addEventListener('click', function (e) {
 
 
 
-  // submit button
+
+  // submit task button
 
   if (e.target && e.target.matches('input.task-submit')) {
     e.preventDefault()
@@ -194,26 +195,9 @@ document.querySelector('.project-list').addEventListener('click', function (e) {
 
       showProjects()
     }
-
-
-
-    // if (project.tasks.length > 0) {
-    //   taskList.innerHTML = ''
-    //   project.tasks.forEach((el) => {
-    //     const taskItem = helpr.createTag('li')
-    //     const taskDiv = helpr.classyDiv('task-div')
-    //     const indx = project.tasks.indexOf(el)
-
-    //     taskDiv.setAttribute('t-index', indx)
-    //     const taskTitle = helpr.textEl('p', el.title)
-    //     const taskDel = helpr.createTag('button', 'task-del')
-    //     taskDel.innerHTML = 'Delete Task'
-    //     helpr.addChildren(taskDiv, [taskTitle, taskDel])
-    //     taskItem.appendChild(taskDiv)
-    //     taskList.appendChild(taskItem)
-    //   })
-    // }
   }
+
+  // delete task button
 
   if (e.target && e.target.matches('button.task-del')) {
     const taskIndex = e.target.parentNode.getAttribute('t-index')
@@ -223,6 +207,16 @@ document.querySelector('.project-list').addEventListener('click', function (e) {
     const project = projects[projIndex]
     project.tasks.splice(taskIndex, 1)
     taskItem.remove()
+  }
+
+  // edit task
+
+  if (e.target && e.target.matches('.task-div p')) {
+    const taskIndex = e.target.parentNode.getAttribute('t-index')
+    const projIndex = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('p-index')
+    const project = projects[projIndex]
+    const task = project.tasks[taskIndex]
+    console.log(task)
   }
 })
 
@@ -240,8 +234,8 @@ document.querySelector('.project-list').addEventListener('click', function (e) {
 const demoProj = newProject('Project 1')
 projects.push(demoProj)
 
-// const demotask = newTask('task 1')
-// demoProj.tasks.push(demotask)
+const demotask = newTask('task 1')
+demoProj.tasks.push(demotask)
 
 
-projects.forEach(displayProject)
+showProjects()
