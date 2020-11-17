@@ -208,25 +208,34 @@ document.querySelector('main').addEventListener('click', function (e) {
 
   // edit task
   const taskModal = document.querySelector('.edit-task')
+
   if (e.target && e.target.matches('.task-div p')) {
     const taskIndex = e.target.parentNode.getAttribute('t-index')
     const projIndex = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('p-index')
     const project = projects[projIndex]
     const task = project.tasks[taskIndex]
-    
-   taskModal.classList.toggle('hide')
+
+    taskModal.classList.toggle('hide')
+
+
+    taskModal.setAttribute('pt-indices', `${projIndex}, ${taskIndex}`)
+
+    if (taskModal.classList.contains('hide')) {
+      taskModal.removeAttribute('pt-indices')
+    }
+
   }
 
   let taskInput = document.querySelector('.task-title input')
-  if(e.target && e.target.matches('.task-title .title')){
-  
-    // taskInput.classList.toggle('hide')
-    taskInput = taskInput.value
+
+  if (e.target && e.target.matches('.task-title .title')) {
+
+    taskInput.classList.toggle('hide')
+    newTaskTitle = taskInput.value
     const taskIndex = e.target.parentNode.getAttribute('t-index')
     const projIndex = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('p-index')
     console.log(taskIndex)
-    // const project = projects[projIndex]
-    // const task = project.tasks[taskIndex]
+
   }
 
   if (!taskInput.classList.contains('hide')) {
