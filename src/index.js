@@ -145,7 +145,7 @@ createProject.addEventListener('click', (e) => {
 
 
 
-document.querySelector('.project-list').addEventListener('click', function (e) {
+document.querySelector('main').addEventListener('click', function (e) {
 
   // TODO : renderTasks function
 
@@ -175,9 +175,6 @@ document.querySelector('.project-list').addEventListener('click', function (e) {
       })
     }
   }
-
-
-
 
   // submit task button
 
@@ -217,12 +214,31 @@ document.querySelector('.project-list').addEventListener('click', function (e) {
     const project = projects[projIndex]
     const task = project.tasks[taskIndex]
     
-    taskModal.classList.toggle('hide')
+   taskModal.classList.toggle('hide')
   }
 
-  if (taskModal.classList.contains('hide') && e.target && e.target.matches('.task-title .title')  ) {
-    console.log("hello")
-   }
+  let taskInput = document.querySelector('.task-title input')
+  if(e.target && e.target.matches('.task-title .title')){
+  
+    // taskInput.classList.toggle('hide')
+    taskInput = taskInput.value
+    const taskIndex = e.target.parentNode.getAttribute('t-index')
+    const projIndex = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('p-index')
+    console.log(taskIndex)
+    // const project = projects[projIndex]
+    // const task = project.tasks[taskIndex]
+  }
+
+  if (!taskInput.classList.contains('hide')) {
+    document.querySelector('main').addEventListener('keyup', function (k) {
+      k.preventDefault();
+      if (k.keyCode === 13 && taskInput.value.length > 0) {
+        task.title = taskInput.value
+        console.log('Hellooo')
+        // showProjects()
+      }
+    })
+  }
 })
 
 
