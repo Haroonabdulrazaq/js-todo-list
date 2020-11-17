@@ -90,7 +90,7 @@ const displayProject = (project) => {
 
 
   project.tasks.forEach((el) => {
-    const taskItem = helpr.createTag('li')
+    const taskItem = helpr.createTag('li', 'task-item')
     const taskDiv = helpr.classyDiv('task-div')
 
     const taskCheckbox = helpr.createTag('input', 'task-checkbox')
@@ -153,15 +153,14 @@ document.querySelector('main').addEventListener('click', function (e) {
 
   // TODO : renderTasks function
 
-  // delete project button
 
+// Checkbox completed 
   if(e.target && e.target.matches('.task-checkbox')){
-    // setTaskValue('completed', checked.value)
     const taskIndex = e.target.parentNode.getAttribute('t-index')
     const projIndex = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('p-index')
     projects[projIndex]["tasks"][taskIndex].completed = e.target.checked
   }
-
+  // delete project button
   if (e.target && e.target.matches('button.del-project')) {
     const delIndx = e.target.parentNode.getAttribute('p-index')
     projects.splice(delIndx, 1)
@@ -219,7 +218,6 @@ document.querySelector('main').addEventListener('click', function (e) {
 
   // edit task
   const taskModal = document.querySelector('.edit-task')
-
 
   // show/hide task modal
 

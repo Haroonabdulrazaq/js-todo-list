@@ -1,0 +1,25 @@
+.hide {
+  display: none;
+}
+
+.edit-task {
+  position: fixed;
+  margin: 0 auto;
+  width: 100%;
+  left: 45%;
+}
+
+.edit-task span {
+  position: relative;
+  left: 220px;
+  top: 0px;
+}
+
+.edit-task .task-description, .edit-task .task-priority {
+  margin-bottom: 20px;
+}
+
+.edit-task .close-edit:hover {
+  cursor: pointer;
+}
+/*# sourceMappingURL=style.css.map */
