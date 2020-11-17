@@ -175,7 +175,7 @@ document.querySelector('.project-list').addEventListener('click', function (e) {
     taskItem.remove()
   }
 
-  // edit task
+  // edit tasks
 
   if (e.target && e.target.matches('.task-div p')) {
     const taskIndex = e.target.parentNode.getAttribute('t-index')
