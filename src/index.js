@@ -209,16 +209,21 @@ document.querySelector('main').addEventListener('click', function (e) {
   // edit task
   const taskModal = document.querySelector('.edit-task')
 
+
   if (e.target && e.target.matches('.task-div p')) {
     const taskIndex = e.target.parentNode.getAttribute('t-index')
     const projIndex = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('p-index')
     const project = projects[projIndex]
     const task = project.tasks[taskIndex]
+    const taskTitle = document.querySelector('.task-title h3')
 
     taskModal.classList.toggle('hide')
 
 
     taskModal.setAttribute('pt-indices', `${projIndex}, ${taskIndex}`)
+
+    taskTitle.innerHTML = `Task: ${task.title}`
+
 
     if (taskModal.classList.contains('hide')) {
       taskModal.removeAttribute('pt-indices')
@@ -239,43 +244,43 @@ document.querySelector('main').addEventListener('click', function (e) {
       k.preventDefault();
       newTaskTitle = taskInput.value
       if (k.keyCode === 13 && taskInput.value.length > 0) {
-         const taskIndicies = taskModal.getAttribute('pt-indices').split(',')
-         let [projIndex, taskIndex] =  [...taskIndicies]
-         projIndex = parseInt(projIndex)
-         taskIndex = parseInt(taskIndex)
-         projects[projIndex]["tasks"][taskIndex].title = newTaskTitle
+        const taskIndicies = taskModal.getAttribute('pt-indices').split(',')
+        let [projIndex, taskIndex] = [...taskIndicies]
+        projIndex = parseInt(projIndex)
+        taskIndex = parseInt(taskIndex)
+        projects[projIndex]["tasks"][taskIndex].title = newTaskTitle
 
-         taskInput.classList.add('hide')
+        taskInput.classList.add('hide')
 
-         let taskTitle = document.querySelector('.task-title .title')
-         taskTitle.innerHTML =`Task: ${newTaskTitle}` 
-       
+        let taskTitle = document.querySelector('.task-title .title')
+        taskTitle.innerHTML = `Task: ${newTaskTitle}`
 
-         showProjects()
+
+        showProjects()
       }
-      
+
     })
   }
-   const taskTextArea = document.querySelector('.task-textarea')
-   if(e.target && e.target.matches('.task-textarea')){
+  const taskTextArea = document.querySelector('.task-textarea')
+  if (e.target && e.target.matches('.task-textarea')) {
     document.querySelector('main').addEventListener('keyup', function (k) {
       k.preventDefault();
-      if(k.keyCode === 13 && taskTextArea.value.length > 0){
+      if (k.keyCode === 13 && taskTextArea.value.length > 0) {
         const taskIndicies = taskModal.getAttribute('pt-indices').split(',')
-        let [projIndex, taskIndex] =  [...taskIndicies]
+        let [projIndex, taskIndex] = [...taskIndicies]
         projIndex = parseInt(projIndex)
         taskIndex = parseInt(taskIndex)
         projects[projIndex]["tasks"][taskIndex].description = taskTextArea.value
-        let taskDescription = document.querySelector('.task-description p') 
+        let taskDescription = document.querySelector('.task-description p')
         taskDescription.innerHTML = taskTextArea.value
 
         taskTextArea.classList.add('hide')
         showProjects()
       }
     })
-   }
+  }
 
-  
+
 })
 
 
