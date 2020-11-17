@@ -1,3 +1,21 @@
 .hide {
   display: none;
 }
+
+.edit-task {
+  position: fixed;
+  margin: 0 auto; 
+  width: 100%;
+  left: 45%;
+
+  span {
+    position: relative;
+    left: 220px;
+    top: 0px;
+  }
+
+  .task-description, .task-priority {
+    margin-bottom: 20px;
+  }
+}
+
