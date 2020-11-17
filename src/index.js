@@ -231,7 +231,7 @@ document.querySelector('main').addEventListener('click', function (e) {
   let taskInput = document.querySelector('.task-title input')
 
   if (e.target && e.target.matches('.task-title .title')) {
-    taskInput.classList.toggle('hide') 
+    taskInput.classList.remove('hide')
   }
 
   if (!taskInput.classList.contains('hide')) {
@@ -245,10 +245,10 @@ document.querySelector('main').addEventListener('click', function (e) {
          taskIndex = parseInt(taskIndex)
          projects[projIndex]["tasks"][taskIndex].title = newTaskTitle
 
+         taskInput.classList.add('hide')
+
          let taskTitle = document.querySelector('.task-title .title')
          taskTitle.innerHTML =`Task: ${newTaskTitle}` 
-         taskInput.classList.remove('hide')
-        
        
 
          showProjects()
