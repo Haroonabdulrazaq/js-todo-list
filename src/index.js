@@ -69,7 +69,7 @@ const displayProject = (project) => {
   projectEdit.innerHTML = 'Edit'
 
   const editInput = helpr.createTag('input', 'edit-input')
-   editInput.classList.add('hide')
+  editInput.classList.add('hide')
 
   const taskList = helpr.createTag('ul', 'task-list')
   const taskDiv = document.createElement('div')
@@ -85,10 +85,33 @@ const displayProject = (project) => {
 
   helpr.addChildren(taskForm, [textIn, taskSubmit])
   helpr.addChildren(taskDiv, [taskList, taskForm])
-  helpr.addChildren(projDiv, [projectTitle,  editInput, projectDel, projectEdit, taskDiv])
+  helpr.addChildren(projDiv, [projectTitle, editInput, projectDel, projectEdit, taskDiv])
   projectList.appendChild(projDiv)
 
+
+  project.tasks.forEach((el) => {
+    const taskItem = helpr.createTag('li')
+    const taskDiv = helpr.classyDiv('task-div')
+    const indx = project.tasks.indexOf(el)
+
+    taskDiv.setAttribute('t-index', indx)
+    const taskTitle = helpr.textEl('p', el.title)
+    const taskDel = helpr.createTag('button', 'task-del')
+    taskDel.innerHTML = 'Delete Task'
+    helpr.addChildren(taskDiv, [taskTitle, taskDel])
+    taskItem.appendChild(taskDiv)
+    taskList.appendChild(taskItem)
+  })
+
+
 }
+
+const showProjects = () => {
+  document.querySelector('.project-list').innerHTML = ''
+  projects.forEach(displayProject)
+}
+
+
 
 
 // module structure: tasks, projects, UI
@@ -116,8 +139,7 @@ createProject.addEventListener('click', (e) => {
     let p = newProject(projectName)
     projects.push(p)
 
-    document.querySelector('.project-list').innerHTML = ''
-    projects.forEach(displayProject)
+    showProjects()
   }
 })
 
@@ -141,7 +163,17 @@ document.querySelector('.project-list').addEventListener('click', function (e) {
     const editInput = e.target.parentNode.querySelector('.edit-input')
     const projectIndx = e.target.parentNode.getAttribute('p-index')
     editInput.classList.toggle('hide')
-    
+
+    if (!editInput.classList.contains('hide')) {
+      document.querySelector('.project-list').addEventListener('keyup', function (k) {
+        k.preventDefault();
+        if (k.keyCode === 13 && editInput.value.length > 0) {
+          projects[projectIndx].title = editInput.value
+
+          showProjects()
+        }
+      })
+    }
   }
 
 
@@ -150,7 +182,7 @@ document.querySelector('.project-list').addEventListener('click', function (e) {
   // submit task button
 
   if (e.target && e.target.matches('input.task-submit')) {
-
+    e.preventDefault()
     const tasks = e.target.parentNode.parentNode.firstChild
     const taskInput = e.target.parentNode.firstChild.value
     const taskList = e.target.parentNode.parentNode.firstChild // selects .task-list
@@ -160,6 +192,8 @@ document.querySelector('.project-list').addEventListener('click', function (e) {
     if (taskInput.length != '') {
       const task = newTask(taskInput)
       project.tasks.push(task)
+
+      showProjects()
     }
   }
 
@@ -176,14 +210,19 @@ document.querySelector('.project-list').addEventListener('click', function (e) {
   }
 
   // edit task
-
+  const taskModal = document.querySelector('.edit-task')
   if (e.target && e.target.matches('.task-div p')) {
     const taskIndex = e.target.parentNode.getAttribute('t-index')
     const projIndex = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('p-index')
     const project = projects[projIndex]
     const task = project.tasks[taskIndex]
-    console.log(task)
+    
+    taskModal.classList.toggle('hide')
   }
+
+  if (taskModal.classList.contains('hide') && e.target && e.target.matches('.task-title .title')  ) {
+    console.log("hello")
+   }
 })
 
 
