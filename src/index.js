@@ -226,28 +226,32 @@ document.querySelector('main').addEventListener('click', function (e) {
 
   }
 
+
+
   let taskInput = document.querySelector('.task-title input')
 
   if (e.target && e.target.matches('.task-title .title')) {
-
-    taskInput.classList.toggle('hide')
-    newTaskTitle = taskInput.value
-    const taskIndex = e.target.parentNode.getAttribute('t-index')
-    const projIndex = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('p-index')
-    console.log(taskIndex)
-
+    taskInput.classList.toggle('hide') 
   }
 
   if (!taskInput.classList.contains('hide')) {
     document.querySelector('main').addEventListener('keyup', function (k) {
       k.preventDefault();
+      newTaskTitle = taskInput.value
       if (k.keyCode === 13 && taskInput.value.length > 0) {
-        task.title = taskInput.value
-        console.log('Hellooo')
-        // showProjects()
+         const taskIndicies = taskModal.getAttribute('pt-indices').split(',')
+         let [projIndex, taskIndex] =  [...taskIndicies]
+         projIndex = parseInt(projIndex)
+         taskIndex = parseInt(taskIndex)
+         projects[projIndex]["tasks"][taskIndex].title = newTaskTitle 
+         
+         showProjects()
       }
+      
     })
   }
+
+  
 })
 
 
