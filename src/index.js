@@ -154,8 +154,8 @@ document.querySelector('main').addEventListener('click', function (e) {
   if (e.target && e.target.matches('button.del-project')) {
     const delIndx = e.target.parentNode.getAttribute('p-index')
     projects.splice(delIndx, 1)
-    document.querySelector('.project-list').innerHTML = ''
-    projects.forEach(displayProject)
+
+    showProjects()
   }
 
   // edit project button
@@ -244,10 +244,8 @@ document.querySelector('main').addEventListener('click', function (e) {
       k.preventDefault();
       newTaskTitle = taskInput.value
       if (k.keyCode === 13 && taskInput.value.length > 0) {
-        const taskIndicies = taskModal.getAttribute('pt-indices').split(',')
+        const taskIndicies = taskModal.getAttribute('pt-indices').split(',').map(Number)
         let [projIndex, taskIndex] = [...taskIndicies]
-        projIndex = parseInt(projIndex)
-        taskIndex = parseInt(taskIndex)
         projects[projIndex]["tasks"][taskIndex].title = newTaskTitle
 
         taskInput.classList.add('hide')
@@ -261,15 +259,17 @@ document.querySelector('main').addEventListener('click', function (e) {
 
     })
   }
+
   const taskTextArea = document.querySelector('.task-textarea')
+
   if (e.target && e.target.matches('.task-textarea')) {
     document.querySelector('main').addEventListener('keyup', function (k) {
       k.preventDefault();
+      // TODO: change from enter or key-up to button
       if (k.keyCode === 13 && taskTextArea.value.length > 0) {
-        const taskIndicies = taskModal.getAttribute('pt-indices').split(',')
+        const taskIndicies = taskModal.getAttribute('pt-indices').split(',').map(Number)
         let [projIndex, taskIndex] = [...taskIndicies]
-        projIndex = parseInt(projIndex)
-        taskIndex = parseInt(taskIndex)
+
         projects[projIndex]["tasks"][taskIndex].description = taskTextArea.value
         let taskDescription = document.querySelector('.task-description p')
         taskDescription.innerHTML = taskTextArea.value
@@ -279,6 +279,11 @@ document.querySelector('main').addEventListener('click', function (e) {
       }
     })
   }
+
+  if (e.target && e.target.matches('.task-description p')) {
+    taskTextArea.classList.toggle('hide')
+  }
+
 
 
 })
