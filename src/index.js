@@ -243,8 +243,14 @@ document.querySelector('main').addEventListener('click', function (e) {
          let [projIndex, taskIndex] =  [...taskIndicies]
          projIndex = parseInt(projIndex)
          taskIndex = parseInt(taskIndex)
-         projects[projIndex]["tasks"][taskIndex].title = newTaskTitle 
-         
+         projects[projIndex]["tasks"][taskIndex].title = newTaskTitle
+
+         let taskTitle = document.querySelector('.task-title .title')
+         taskTitle.innerHTML =`Task: ${newTaskTitle}` 
+         taskInput.classList.remove('hide')
+        
+       
+
          showProjects()
       }
       
