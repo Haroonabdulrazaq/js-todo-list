@@ -233,6 +233,11 @@ document.querySelector('main').addEventListener('click', function (e) {
 
   }
 
+  const setTaskValue = (taskKey, taskValue) => {
+    const taskIndicies = taskModal.getAttribute('pt-indices').split(',').map(Number)
+    let [projIndex, taskIndex] = [...taskIndicies]
+    projects[projIndex]["tasks"][taskIndex][taskKey] = taskValue
+   }
 
   // TODO: refactor const getTaskIndx = () => {
 
@@ -252,9 +257,7 @@ document.querySelector('main').addEventListener('click', function (e) {
       k.preventDefault();
       newTaskTitle = taskInput.value
       if (k.key === 'Enter' && taskInput.value.length > 0) {
-        const taskIndicies = taskModal.getAttribute('pt-indices').split(',').map(Number)
-        let [projIndex, taskIndex] = [...taskIndicies]
-        projects[projIndex]["tasks"][taskIndex].title = newTaskTitle
+         setTaskValue("title", newTaskTitle)
 
         taskInput.classList.add('hide')
 
@@ -277,10 +280,8 @@ document.querySelector('main').addEventListener('click', function (e) {
       k.preventDefault();
       // TODO: change from enter or key-up to button
       if (k.key === 'Enter' && taskTextArea.value.length > 0) {
-        const taskIndicies = taskModal.getAttribute('pt-indices').split(',').map(Number)
-        let [projIndex, taskIndex] = [...taskIndicies]
 
-        projects[projIndex]["tasks"][taskIndex].description = taskTextArea.value
+        setTaskValue("description", taskTextArea)
         let taskDescription = document.querySelector('.task-description p')
         taskDescription.innerHTML = taskTextArea.value
 
@@ -299,10 +300,7 @@ document.querySelector('main').addEventListener('click', function (e) {
   // set task-priority
 
   if (e.target && e.target.matches('.task-priority input[name="taskPriority"]')) {
-    const taskIndicies = taskModal.getAttribute('pt-indices').split(',').map(Number)
-    let [projIndex, taskIndex] = [...taskIndicies]
-
-    projects[projIndex]["tasks"][taskIndex].priority = e.target.value
+    setTaskValue("priority", e.target.value)
   }
 
   // close task edit
