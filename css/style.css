@@ -55,7 +55,9 @@
   margin-right: 5px;
 }
 
-.project-list .project .del-project:hover, .project-list .project .del-task:hover {
+.project-list .project .del-project:hover,
+.project-list .project .del-task:hover,
+.project-list .project .task-item:hover {
   cursor: pointer;
 }
 

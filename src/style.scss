@@ -46,7 +46,9 @@
       margin-right: 5px;
     }
 
-    .del-project:hover, .del-task:hover {
+    .del-project:hover, 
+    .del-task:hover, 
+    .task-item:hover {
       cursor: pointer;
     }
 

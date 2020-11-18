@@ -227,7 +227,7 @@ document.querySelector('main').addEventListener('click', function (e) {
 
   // delete task button
 
-  if (matchTarget(e, 'button.task-del')) {
+  if (matchTarget(e, 'button.del-task')) {
     const taskIndex = e.target.parentNode.getAttribute('t-index')
     const taskList = e.target.parentNode.parentNode.firstChild
     const taskItem = e.target.parentNode.parentNode
