@@ -100,9 +100,10 @@ const displayProject = (project) => {
 
     taskDiv.setAttribute('t-index', index)
     const taskTitle = helpr.textEl('p', el.title)
-    const taskDel = helpr.createTag('button', 'task-del')
+    const taskEdit = helpr.createTag('i', 'fa fa-edit hide')
+    const taskDel = helpr.createTag('button', 'del-task')
     taskDel.innerHTML = 'Delete Task'
-    helpr.addChildren(taskDiv, [taskCheckbox, taskTitle, taskDel])
+    helpr.addChildren(taskDiv, [taskCheckbox, taskTitle, taskEdit, taskDel])
     taskItem.appendChild(taskDiv)
     taskList.appendChild(taskItem)
   })
@@ -113,7 +114,22 @@ const displayProject = (project) => {
 const showProjects = () => {
   document.querySelector('.project-list').innerHTML = ''
   projects.forEach(displayProject)
+
+  const taskItem = document.querySelector('.task-item .task-div')
+  const editIcon = taskItem.querySelector('.fa-edit')
+
+  taskItem.addEventListener('mouseover', e => {
+    editIcon.classList.remove('hide')
+
+  })
+
+  taskItem.addEventListener('mouseleave', e => {
+    editIcon.classList.add('hide')
+
+  })
 }
+
+
 
 
 
