@@ -64,11 +64,11 @@ const displayProject = (project) => {
   const projectTitle = helpr.textEl('h3', project.title)
   const projectDel = helpr.createTag('i', 'del-project fa fa-trash')
 
-  const projectEdit = helpr.createTag('button', 'edit-project hide')
-  projectEdit.innerHTML = 'Edit Project'
+  const projectEdit = helpr.createTag('i', 'edit-project fa fa-edit ghost')
 
   const editInput = helpr.createTag('input', 'edit-input')
   editInput.classList.add('hide')
+  editInput.setAttribute('placeholder', 'Enter new title here')
 
   const taskList = helpr.createTag('ul', 'task-list')
   const taskDiv = document.createElement('div')
@@ -119,11 +119,11 @@ const showProjects = () => {
     const editProj = _project.querySelector('.edit-project')
 
     _project.addEventListener('mouseover', e => {
-      editProj.classList.remove('hide')
+      editProj.classList.remove('ghost')
     })
 
     _project.addEventListener('mouseleave', e => {
-      editProj.classList.add('hide')
+      editProj.classList.add('ghost')
     })
   }
 
@@ -201,17 +201,15 @@ document.querySelector('main').addEventListener('click', function (e) {
 
   // delete project button
   if (matchTarget(e, 'i.del-project')) {
-    const value = confirm("Are you sure ?")
-    if(value){
-      const delIndex = e.target.parentNode.getAttribute('p-index')
-      projects.splice(delIndex, 1)
-  
-      showProjects()
-    }   
+    // TODO : Add confirmation
+    const delIndex = e.target.parentNode.getAttribute('p-index')
+    projects.splice(delIndex, 1)
+
+    showProjects()
   }
 
   // edit project button
-  if (matchTarget(e, 'button.edit-project')) {
+  if (matchTarget(e, 'i.edit-project')) {
     const editInput = e.target.parentNode.querySelector('.edit-input')
     const projectIndex = e.target.parentNode.getAttribute('p-index')
     editInput.classList.toggle('hide')
@@ -359,12 +357,12 @@ document.querySelector('main').addEventListener('click', function (e) {
     taskModal.classList.toggle('hide')
   }
 
-  if(matchTarget(e, '.date-input')){
-    if(e.target.value.length > 4){
-      console.log(e.target.value)
-    }
+  if (matchTarget(e, '.date-input')) {
+    // if (e.target.value.length > 4) {
+    //   console.log(e.target.value)
+    // }
     // setTaskValue("dueDate", e.target.value)
-    // 
+
   }
 
 })

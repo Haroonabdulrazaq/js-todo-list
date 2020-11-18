@@ -2,6 +2,10 @@
   display: none;
 }
 
+.ghost {
+  opacity: 0;
+}
+
 .task-div {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -21,6 +25,22 @@
 
 .task-div p {
   width: 250px;
+}
+
+.new-project-form {
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-top: 1rem;
+}
+
+.new-project-form .fa-close {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.new-project-form .fa-close:hover {
+  cursor: pointer;
 }
 
 .project-list::before {
@@ -53,6 +73,12 @@
 
 .project-list .project button, .project-list .project input {
   margin-right: 5px;
+}
+
+.project-list .project .edit-project {
+  position: absolute;
+  right: 50px;
+  top: 20px;
 }
 
 .project-list .project .del-project {
@@ -90,10 +116,18 @@
           box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.02);
 }
 
+.edit-task .task-title h3, .edit-task .task-title input {
+  margin-bottom: 1rem;
+}
+
 .edit-task span {
   position: relative;
   left: 27vw;
   top: 0px;
+}
+
+.edit-task .task-textarea {
+  padding: 10px;
 }
 
 .edit-task .task-description, .edit-task .task-priority {
