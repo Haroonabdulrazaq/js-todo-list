@@ -52,7 +52,8 @@ const newProject = (title) => ({
 const projects = []
 const projectList = document.querySelector('.project-list');
 
-localStorage.setItem('projects', projects)
+
+
 
 
 // DOM manipulation
@@ -372,14 +373,6 @@ document.querySelector('main').addEventListener('click', function (e) {
     taskModal.classList.toggle('hide')
   }
 
-  // if (matchTarget(e, '.date-input')) {
-  //   if (e.target.value.length > 4) {
-  //     console.log(e.target.value)
-  //   }
-  //   setTaskValue("dueDate", e.target.value)
-
-  // }
-
 })
 
 const dueDate = document.querySelector('.date-input')
@@ -409,5 +402,4 @@ projects.push(demoProj)
 const demotask = newTask('task 1')
 demoProj.tasks.push(demotask)
 
-
-showProjects()
+ showProjects()
