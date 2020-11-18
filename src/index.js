@@ -235,9 +235,9 @@ document.querySelector('main').addEventListener('click', function (e) {
 
   if (matchTarget(e, 'button.del-task')) {
     const taskIndex = e.target.parentNode.getAttribute('t-index')
-    const taskList = e.target.parentNode.parentNode.firstChild
-    const taskItem = e.target.parentNode.parentNode
-    const projIndex = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('p-index')
+    const taskList = nthParent(e.target, 2).firstChild
+    const taskItem = nthParent(e.target, 2)
+    const projIndex = nthParent(e.target, 5).getAttribute('p-index')
     const project = projects[projIndex]
     project.tasks.splice(taskIndex, 1)
     taskItem.remove()
@@ -250,23 +250,21 @@ document.querySelector('main').addEventListener('click', function (e) {
 
   if (matchTarget(e, '.task-div p') || matchTarget(e, '.task-div i')) {
     const taskIndex = e.target.parentNode.getAttribute('t-index')
-    const projIndex = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('p-index')
+    const projIndex = nthParent(e.target, 5).getAttribute('p-index')
     const project = projects[projIndex]
     const task = project.tasks[taskIndex]
     const taskTitle = document.querySelector('.task-title h3')
 
     taskModal.classList.toggle('hide')
-
-
     taskModal.setAttribute('pt-indices', `${projIndex}, ${taskIndex}`)
 
     taskTitle.innerHTML = `Task: ${task.title}`
-
 
     if (taskModal.classList.contains('hide')) {
       taskModal.removeAttribute('pt-indices')
     }
 
+    showProjects()
   }
 
   // locates task object in projects array and sets value
@@ -274,7 +272,8 @@ document.querySelector('main').addEventListener('click', function (e) {
   const setTaskValue = (taskKey, taskValue) => {
     const taskIndicies = taskModal.getAttribute('pt-indices').split(',').map(Number)
     let [projIndex, taskIndex] = [...taskIndicies]
-    projects[projIndex]["tasks"][taskIndex][taskKey] = taskValue
+    let taskProp = projects[projIndex]["tasks"][taskIndex][taskKey]
+    taskProp = taskValue
   }
 
 
