@@ -66,7 +66,7 @@ const displayProject = (project) => {
   projectDel.innerHTML = 'Delete Project'
 
   const projectEdit = helpr.createTag('button', 'edit-project')
-  projectEdit.innerHTML = 'Edit'
+  projectEdit.innerHTML = 'Edit Project'
 
   const editInput = helpr.createTag('input', 'edit-input')
   editInput.classList.add('hide')
@@ -85,7 +85,7 @@ const displayProject = (project) => {
 
   helpr.addChildren(taskForm, [textIn, taskSubmit])
   helpr.addChildren(taskDiv, [taskList, taskForm])
-  helpr.addChildren(projDiv, [projectTitle, editInput, projectDel, projectEdit, taskDiv])
+  helpr.addChildren(projDiv, [projectTitle, editInput, projectEdit, projectDel, taskDiv])
   projectList.appendChild(projDiv)
 
 
@@ -95,10 +95,10 @@ const displayProject = (project) => {
 
     const taskCheckbox = helpr.createTag('input', 'task-checkbox')
     taskCheckbox.setAttribute('type', 'checkbox')
-    
-    const indx = project.tasks.indexOf(el)
 
-    taskDiv.setAttribute('t-index', indx)
+    const index = project.tasks.indexOf(el)
+
+    taskDiv.setAttribute('t-index', index)
     const taskTitle = helpr.textEl('p', el.title)
     const taskDel = helpr.createTag('button', 'task-del')
     taskDel.innerHTML = 'Delete Task'
@@ -153,32 +153,37 @@ document.querySelector('main').addEventListener('click', function (e) {
 
   // TODO : renderTasks function
 
+  const matchTarget = (event, target) => {
+    return (event.target && event.target.matches(target))
+  }
 
-// Checkbox completed 
-  if(e.target && e.target.matches('.task-checkbox')){
+
+  // Checkbox completed 
+  if (matchTarget(e, '.task-checkbox')) {
     const taskIndex = e.target.parentNode.getAttribute('t-index')
     const projIndex = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('p-index')
     projects[projIndex]["tasks"][taskIndex].completed = e.target.checked
+    console.log(taskIndex)
   }
   // delete project button
-  if (e.target && e.target.matches('button.del-project')) {
-    const delIndx = e.target.parentNode.getAttribute('p-index')
-    projects.splice(delIndx, 1)
+  if (matchTarget(e, 'button.del-project')) {
+    const delIndex = e.target.parentNode.getAttribute('p-index')
+    projects.splice(delIndex, 1)
 
     showProjects()
   }
 
   // edit project button
-  if (e.target && e.target.matches('button.edit-project')) {
+  if (matchTarget(e, 'button.edit-project')) {
     const editInput = e.target.parentNode.querySelector('.edit-input')
-    const projectIndx = e.target.parentNode.getAttribute('p-index')
+    const projectIndex = e.target.parentNode.getAttribute('p-index')
     editInput.classList.toggle('hide')
 
     if (!editInput.classList.contains('hide')) {
       document.querySelector('.project-list').addEventListener('keyup', function (k) {
         k.preventDefault();
         if (k.key === 'Enter' && editInput.value.length > 0) {
-          projects[projectIndx].title = editInput.value
+          projects[projectIndex].title = editInput.value
 
           showProjects()
         }
@@ -188,13 +193,13 @@ document.querySelector('main').addEventListener('click', function (e) {
 
   // submit task button
 
-  if (e.target && e.target.matches('input.task-submit')) {
+  if (matchTarget(e, 'input.task-submit')) {
     e.preventDefault()
     const tasks = e.target.parentNode.parentNode.firstChild
     const taskInput = e.target.parentNode.firstChild.value
     const taskList = e.target.parentNode.parentNode.firstChild // selects .task-list
-    const projIndx = e.target.parentNode.parentNode.parentNode.getAttribute('p-index')
-    const project = projects[projIndx]
+    const projIndex = e.target.parentNode.parentNode.parentNode.getAttribute('p-index')
+    const project = projects[projIndex]
 
     if (taskInput.length != '') {
       const task = newTask(taskInput)
@@ -206,7 +211,7 @@ document.querySelector('main').addEventListener('click', function (e) {
 
   // delete task button
 
-  if (e.target && e.target.matches('button.task-del')) {
+  if (matchTarget(e, 'button.task-del')) {
     const taskIndex = e.target.parentNode.getAttribute('t-index')
     const taskList = e.target.parentNode.parentNode.firstChild
     const taskItem = e.target.parentNode.parentNode
@@ -221,7 +226,7 @@ document.querySelector('main').addEventListener('click', function (e) {
 
   // show/hide task modal
 
-  if (e.target && e.target.matches('.task-div p')) {
+  if (matchTarget(e, '.task-div p')) {
     const taskIndex = e.target.parentNode.getAttribute('t-index')
     const projIndex = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('p-index')
     const project = projects[projIndex]
@@ -242,20 +247,20 @@ document.querySelector('main').addEventListener('click', function (e) {
 
   }
 
+  // locates task object in projects array and sets value
+
   const setTaskValue = (taskKey, taskValue) => {
     const taskIndicies = taskModal.getAttribute('pt-indices').split(',').map(Number)
     let [projIndex, taskIndex] = [...taskIndicies]
     projects[projIndex]["tasks"][taskIndex][taskKey] = taskValue
-   }
+  }
 
-  // TODO: refactor const getTaskIndx = () => {
 
-  // }
 
 
   let taskInput = document.querySelector('.task-title input')
 
-  if (e.target && e.target.matches('.task-title .title')) {
+  if (matchTarget(e, '.task-title .title')) {
     taskInput.classList.remove('hide')
   }
 
@@ -266,7 +271,7 @@ document.querySelector('main').addEventListener('click', function (e) {
       k.preventDefault();
       newTaskTitle = taskInput.value
       if (k.key === 'Enter' && taskInput.value.length > 0) {
-         setTaskValue("title", newTaskTitle)
+        setTaskValue("title", newTaskTitle)
 
         taskInput.classList.add('hide')
 
@@ -284,7 +289,7 @@ document.querySelector('main').addEventListener('click', function (e) {
 
   const taskTextArea = document.querySelector('.task-textarea')
 
-  if (e.target && e.target.matches('.task-textarea')) {
+  if (matchTarget(e, '.task-textarea')) {
     document.querySelector('main').addEventListener('keyup', function (k) {
       k.preventDefault();
       // TODO: change from enter or key-up to button
@@ -302,21 +307,20 @@ document.querySelector('main').addEventListener('click', function (e) {
 
   // show/hide task-description input
 
-  if (e.target && e.target.matches('.task-description p')) {
+  if (matchTarget(e, '.task-description p')) {
     taskTextArea.classList.toggle('hide')
   }
 
   // set task-priority
 
-  if (e.target && e.target.matches('.task-priority input[name="taskPriority"]')) {
+  if (matchTarget(e, '.task-priority input[name="taskPriority"]')) {
     setTaskValue("priority", e.target.value)
   }
 
   // close task edit
 
-  if (e.target && e.target.matches('.close-edit i')) {
+  if (matchTarget(e, '.close-edit i')) {
     taskModal.classList.toggle('hide')
-
   }
 
 
