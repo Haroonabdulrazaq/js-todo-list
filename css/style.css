@@ -1,9 +1,25 @@
+main {
+  min-height: 100vh;
+  height: auto;
+  background: #7F7FD5;
+  /* fallback for old browsers */
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-gradient(linear, left top, right top, from(#91EAE4), color-stop(#86A8E7), to(#7F7FD5));
+  background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
 .hide {
   display: none;
 }
 
 .ghost {
   opacity: 0;
+}
+
+.add-project {
+  margin-top: 1rem;
+  font-weight: bold;
 }
 
 .task-div {
@@ -50,6 +66,9 @@
   left: 15px;
   display: block;
   width: auto;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.6rem;
   height: 80px;
 }
 
@@ -89,7 +108,8 @@
 
 .project-list .project .del-project:hover,
 .project-list .project .del-task:hover,
-.project-list .project .task-item:hover {
+.project-list .project .task-item:hover,
+.project-list .project .edit-project:hover {
   cursor: pointer;
 }
 
@@ -97,6 +117,7 @@
   content: 'Tasks';
   position: relative;
   top: 1.6rem;
+  color: #000;
   display: block;
   width: auto;
   min-width: 150px;

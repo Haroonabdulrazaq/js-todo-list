@@ -99,7 +99,7 @@ const displayProject = (project) => {
 
     taskDiv.setAttribute('t-index', index)
     const taskTitle = helpr.textEl('p', el.title)
-    const taskEdit = helpr.createTag('i', 'fa fa-edit hide')
+    const taskEdit = helpr.createTag('i', 'fa fa-edit ghost')
     const taskDel = helpr.createTag('button', 'del-task')
     taskDel.innerHTML = 'Delete Task'
     helpr.addChildren(taskDiv, [taskCheckbox, taskTitle, taskEdit, taskDel])
@@ -132,11 +132,11 @@ const showProjects = () => {
     const editIcon = taskItem.querySelector('.fa-edit')
 
     taskItem.addEventListener('mouseover', e => {
-      editIcon.classList.remove('hide')
+      editIcon.classList.remove('ghost')
     })
 
     taskItem.addEventListener('mouseleave', e => {
-      editIcon.classList.add('hide')
+      editIcon.classList.add('ghost')
     })
   }
 }
@@ -164,8 +164,13 @@ const nthParent = (elem, n) => {
 // add project button
 const addProject = document.querySelector('.add-project')
 const projectForm = document.querySelector('.new-project-form')
+const closeProjectEdit = document.querySelector('.close-project-edit')
 
 addProject.addEventListener('click', () => {
+  projectForm.classList.toggle('hide')
+})
+
+closeProjectEdit.addEventListener('click', () => {
   projectForm.classList.toggle('hide')
 })
 
