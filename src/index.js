@@ -201,10 +201,13 @@ document.querySelector('main').addEventListener('click', function (e) {
 
   // delete project button
   if (matchTarget(e, 'i.del-project')) {
-    const delIndex = e.target.parentNode.getAttribute('p-index')
-    projects.splice(delIndex, 1)
-
-    showProjects()
+    const value = confirm("Are you sure ?")
+    if(value){
+      const delIndex = e.target.parentNode.getAttribute('p-index')
+      projects.splice(delIndex, 1)
+  
+      showProjects()
+    }   
   }
 
   // edit project button
@@ -356,6 +359,13 @@ document.querySelector('main').addEventListener('click', function (e) {
     taskModal.classList.toggle('hide')
   }
 
+  if(matchTarget(e, '.date-input')){
+    if(e.target.value.length > 4){
+      console.log(e.target.value)
+    }
+    // setTaskValue("dueDate", e.target.value)
+    // 
+  }
 
 })
 
