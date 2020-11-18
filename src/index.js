@@ -290,8 +290,7 @@ document.querySelector('main').addEventListener('click', function (e) {
   const setTaskValue = (taskKey, taskValue) => {
     const taskIndicies = taskModal.getAttribute('pt-indices').split(',').map(Number)
     let [projIndex, taskIndex] = [...taskIndicies]
-    let taskProp = projects[projIndex]["tasks"][taskIndex][taskKey]
-    taskProp = taskValue
+    projects[projIndex]["tasks"][taskIndex][taskKey] = taskValue
   }
 
 
@@ -301,6 +300,7 @@ document.querySelector('main').addEventListener('click', function (e) {
 
   if (matchTarget(e, '.task-title .title')) {
     taskInput.classList.remove('hide')
+    console.log(projects)
   }
 
   // set task title
@@ -353,7 +353,7 @@ document.querySelector('main').addEventListener('click', function (e) {
   // set task-priority
 
   if (matchTarget(e, '.task-priority input[name="taskPriority"]')) {
-    setTaskValue("priority", e.target.value)
+      setTaskValue("priority", e.target.value)
   }
 
   // close task edit
