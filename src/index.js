@@ -115,19 +115,24 @@ const showProjects = () => {
   document.querySelector('.project-list').innerHTML = ''
   projects.forEach(displayProject)
 
-  const taskItem = document.querySelector('.task-item .task-div')
-  const editIcon = taskItem.querySelector('.fa-edit')
+  if (projects.length > 0 && projects[0].tasks.length > 0) {
+    const taskItem = document.querySelector('.task-item .task-div')
+    const editIcon = taskItem.querySelector('.fa-edit')
 
-  taskItem.addEventListener('mouseover', e => {
-    editIcon.classList.remove('hide')
+    taskItem.addEventListener('mouseover', e => {
+      editIcon.classList.remove('hide')
+    })
 
-  })
-
-  taskItem.addEventListener('mouseleave', e => {
-    editIcon.classList.add('hide')
-
-  })
+    taskItem.addEventListener('mouseleave', e => {
+      editIcon.classList.add('hide')
+    })
+  }
 }
+
+const nthParent = (elem, n) => {
+  return n === 0 ? elem : nthParent(elem.parentNode, n - 1);
+}
+
 
 
 
@@ -177,10 +182,11 @@ document.querySelector('main').addEventListener('click', function (e) {
   // Checkbox completed 
   if (matchTarget(e, '.task-checkbox')) {
     const taskIndex = e.target.parentNode.getAttribute('t-index')
-    const projIndex = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('p-index')
-    projects[projIndex]["tasks"][taskIndex].completed = e.target.checked
-    console.log(taskIndex)
+    const projIndex = nthParent(e.target, 5).getAttribute('p-index')
+    const project = projects[projIndex]["tasks"][taskIndex]
+    project.completed = e.target.checked
   }
+
   // delete project button
   if (matchTarget(e, 'button.del-project')) {
     const delIndex = e.target.parentNode.getAttribute('p-index')
@@ -211,10 +217,10 @@ document.querySelector('main').addEventListener('click', function (e) {
 
   if (matchTarget(e, 'input.task-submit')) {
     e.preventDefault()
-    const tasks = e.target.parentNode.parentNode.firstChild
+    const tasks = nthParent(e.target, 2).firstChild
     const taskInput = e.target.parentNode.firstChild.value
-    const taskList = e.target.parentNode.parentNode.firstChild // selects .task-list
-    const projIndex = e.target.parentNode.parentNode.parentNode.getAttribute('p-index')
+    const taskList = nthParent(e.target, 2).firstChild // selects .task-list
+    const projIndex = nthParent(e.target, 3).getAttribute('p-index')
     const project = projects[projIndex]
 
     if (taskInput.length != '') {
@@ -242,7 +248,7 @@ document.querySelector('main').addEventListener('click', function (e) {
 
   // show/hide task modal
 
-  if (matchTarget(e, '.task-div p')) {
+  if (matchTarget(e, '.task-div p') || matchTarget(e, '.task-div i')) {
     const taskIndex = e.target.parentNode.getAttribute('t-index')
     const projIndex = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute('p-index')
     const project = projects[projIndex]
