@@ -51,7 +51,6 @@ const newProject = (title) => ({
 // list containing projects
 
 const projects = localStorage.getItem('projects_store') ? JSON.parse(localStorage.getItem('projects_store')) : []
-//const projects = []
 const projectList = document.querySelector('.project-list');
 
 
@@ -383,6 +382,22 @@ dueDate.addEventListener('change', (e) => {
   taskProp["dueDate"] = e.target.value
 })
 
+
+// ISSUES TO FIX:
+
+// project/task edit icons only showing on first item
+
+// task-modal does update when working with multiple tasks
+
+// confirmation when deleting project with custom modal
+
+// visual display of priority and due-date
+
+// task delete not working
+
+// webpack
+
+// linters
 
 
 /* task CRUD
