@@ -50,7 +50,10 @@ const newProject = (title) => ({
 
 // list containing projects
 const projects = []
-const projectList = document.querySelector('.project-list')
+const projectList = document.querySelector('.project-list');
+
+localStorage.setItem('projects', projects)
+
 
 // DOM manipulation
 
@@ -74,11 +77,11 @@ const displayProject = (project) => {
   const taskDiv = document.createElement('div')
 
   const taskForm = document.createElement('form')
-  let textIn = document.createElement('input')
+  let textIn = helpr.createTag('input', 'input')//document.createElement('input')
   textIn.setAttribute('type', 'text')
 
 
-  let taskSubmit = helpr.createTag('input', 'task-submit')
+  let taskSubmit = helpr.createTag('input', 'task-submit button mt-4 is-info')
   taskSubmit.setAttribute('type', 'submit')
   taskSubmit.setAttribute('value', 'Add Task')
 
@@ -106,8 +109,6 @@ const displayProject = (project) => {
     taskItem.appendChild(taskDiv)
     taskList.appendChild(taskItem)
   })
-
-
 }
 
 const showProjects = () => {
@@ -388,7 +389,6 @@ dueDate.addEventListener('change', (e)=>{
   let [projIndex, taskIndex] = [...taskIndicies]
   let taskProp = projects[projIndex]["tasks"][taskIndex]
   taskProp["dueDate"] = e.target.value
-  console.log(projects)
 })
 
 
