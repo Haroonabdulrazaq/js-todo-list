@@ -100,8 +100,8 @@ const displayProject = (project) => {
     taskDiv.setAttribute('t-index', index)
     const taskTitle = helpr.textEl('p', el.title)
     const taskEdit = helpr.createTag('i', 'fa fa-edit ghost')
-    const taskDel = helpr.createTag('button', 'del-task')
-    taskDel.innerHTML = 'Delete Task'
+    const taskDel = helpr.createTag('i', 'fa fa-trash')
+    // taskDel.innerHTML = 'Delete Task'
     helpr.addChildren(taskDiv, [taskCheckbox, taskTitle, taskEdit, taskDel])
     taskItem.appendChild(taskDiv)
     taskList.appendChild(taskItem)
@@ -185,7 +185,7 @@ createProject.addEventListener('click', (e) => {
   }
 })
 
-
+const taskModal = document.querySelector('.edit-task')
 
 document.querySelector('main').addEventListener('click', function (e) {
 
@@ -262,7 +262,7 @@ document.querySelector('main').addEventListener('click', function (e) {
   }
 
   // edit task
-  const taskModal = document.querySelector('.edit-task')
+  
 
   // show/hide task modal
 
@@ -362,14 +362,25 @@ document.querySelector('main').addEventListener('click', function (e) {
     taskModal.classList.toggle('hide')
   }
 
-  if (matchTarget(e, '.date-input')) {
-    // if (e.target.value.length > 4) {
-    //   console.log(e.target.value)
-    // }
-    // setTaskValue("dueDate", e.target.value)
+  // if (matchTarget(e, '.date-input')) {
+  //   if (e.target.value.length > 4) {
+  //     console.log(e.target.value)
+  //   }
+  //   setTaskValue("dueDate", e.target.value)
 
-  }
+  // }
 
+})
+
+const dueDate = document.querySelector('.date-input')
+
+dueDate.addEventListener('change', (e)=>{
+  e.preventDefault();
+  const taskIndicies = taskModal.getAttribute('pt-indices').split(',').map(Number)
+  let [projIndex, taskIndex] = [...taskIndicies]
+  let taskProp = projects[projIndex]["tasks"][taskIndex][taskKey]
+  console.log(taskProp)
+    // console.log(projects)
 })
 
 
