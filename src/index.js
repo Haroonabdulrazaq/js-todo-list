@@ -62,10 +62,9 @@ const displayProject = (project) => {
   projDiv.setAttribute('p-index', idx)
 
   const projectTitle = helpr.textEl('h3', project.title)
-  const projectDel = helpr.createTag('button', 'del-project')
-  projectDel.innerHTML = 'Delete Project'
+  const projectDel = helpr.createTag('i', 'del-project fa fa-trash')
 
-  const projectEdit = helpr.createTag('button', 'edit-project')
+  const projectEdit = helpr.createTag('button', 'edit-project hide')
   projectEdit.innerHTML = 'Edit Project'
 
   const editInput = helpr.createTag('input', 'edit-input')
@@ -114,6 +113,19 @@ const displayProject = (project) => {
 const showProjects = () => {
   document.querySelector('.project-list').innerHTML = ''
   projects.forEach(displayProject)
+
+  if (projects.length > 0) {
+    const _project = document.querySelector('.project')
+    const editProj = _project.querySelector('.edit-project')
+
+    _project.addEventListener('mouseover', e => {
+      editProj.classList.remove('hide')
+    })
+
+    _project.addEventListener('mouseleave', e => {
+      editProj.classList.add('hide')
+    })
+  }
 
   if (projects.length > 0 && projects[0].tasks.length > 0) {
     const taskItem = document.querySelector('.task-item .task-div')
@@ -188,7 +200,7 @@ document.querySelector('main').addEventListener('click', function (e) {
   }
 
   // delete project button
-  if (matchTarget(e, 'button.del-project')) {
+  if (matchTarget(e, 'i.del-project')) {
     const delIndex = e.target.parentNode.getAttribute('p-index')
     projects.splice(delIndex, 1)
 

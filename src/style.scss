@@ -46,6 +46,12 @@
       margin-right: 5px;
     }
 
+    .del-project {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+    }
+
     .del-project:hover, 
     .del-task:hover, 
     .task-item:hover {

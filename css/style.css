@@ -55,6 +55,12 @@
   margin-right: 5px;
 }
 
+.project-list .project .del-project {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+
 .project-list .project .del-project:hover,
 .project-list .project .del-task:hover,
 .project-list .project .task-item:hover {
