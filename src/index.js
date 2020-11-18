@@ -54,6 +54,32 @@ const projects = localStorage.getItem('projects_store') ? JSON.parse(localStorag
 const projectList = document.querySelector('.project-list');
 
 
+// get local storage
+
+const storageAvailable = (type) => {
+  var storage;
+  try {
+    storage = window[type];
+    var x = '__storage_test__';
+    storage.setItem(x, x);
+    storage.removeItem(x);
+    return true;
+  }
+  catch (e) {
+    return e instanceof DOMException && (
+      // everything except Firefox
+      e.code === 22 ||
+      // Firefox
+      e.code === 1014 ||
+      // test name field too, because code might not be present
+      // everything except Firefox
+      e.name === 'QuotaExceededError' ||
+      // Firefox
+      e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
+      // acknowledge QuotaExceededError only if there's something already stored
+      (storage && storage.length !== 0);
+  }
+}
 
 
 // DOM manipulation
@@ -151,6 +177,11 @@ const showProjects = () => {
 const nthParent = (elem, n) => {
   return n === 0 ? elem : nthParent(elem.parentNode, n - 1);
 }
+
+
+
+
+
 
 
 // module structure: tasks, projects, UI
@@ -337,6 +368,8 @@ document.querySelector('main').addEventListener('click', function (e) {
 
   // set task description
 
+
+
   if (matchTarget(e, '.task-textarea')) {
     document.querySelector('main').addEventListener('keyup', function (k) {
       k.preventDefault();
@@ -417,4 +450,5 @@ dueDate.addEventListener('change', (e) => {
 // demoProj.tasks.push(demotask)
 
 
- showProjects()
+
+showProjects()
