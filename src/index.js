@@ -185,7 +185,7 @@ createProject.addEventListener('click', (e) => {
   }
 })
 
-
+const taskModal = document.querySelector('.edit-task')
 
 document.querySelector('main').addEventListener('click', function (e) {
 
@@ -262,7 +262,7 @@ document.querySelector('main').addEventListener('click', function (e) {
   }
 
   // edit task
-  const taskModal = document.querySelector('.edit-task')
+
 
   // show/hide task modal
 
@@ -372,7 +372,15 @@ document.querySelector('main').addEventListener('click', function (e) {
 
 })
 
+const dueDate = document.querySelector('.date-input')
 
+dueDate.addEventListener('change', (e)=>{
+  const taskIndicies = taskModal.getAttribute('pt-indices').split(',').map(Number)
+  let [projIndex, taskIndex] = [...taskIndicies]
+  let taskProp = projects[projIndex]["tasks"][taskIndex]
+  taskProp["dueDate"] = e.target.value
+  console.log(projects)
+})
 
 
 
