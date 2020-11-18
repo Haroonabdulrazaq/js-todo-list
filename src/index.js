@@ -55,7 +55,7 @@ const projectList = document.querySelector('.project-list')
 // DOM manipulation
 
 const displayProject = (project) => {
-  const projDiv = helpr.classyDiv('project')
+  const projDiv = helpr.classyDiv('project card')
 
   // TEMP: for delete fn
   const idx = projects.indexOf(project)
@@ -325,6 +325,7 @@ document.querySelector('main').addEventListener('click', function (e) {
 
 
 })
+
 
 
 /* task CRUD
