@@ -49,10 +49,38 @@ const newProject = (title) => ({
 })
 
 // list containing projects
-const projects = []
+
+const projects = localStorage.getItem('projects_store') ? JSON.parse(localStorage.getItem('projects_store')) : []
+//const projects = []
 const projectList = document.querySelector('.project-list');
 
-localStorage.setItem('projects', projects)
+
+// get local storage
+
+const storageAvailable = (type) => {
+  var storage;
+  try {
+    storage = window[type];
+    var x = '__storage_test__';
+    storage.setItem(x, x);
+    storage.removeItem(x);
+    return true;
+  }
+  catch (e) {
+    return e instanceof DOMException && (
+      // everything except Firefox
+      e.code === 22 ||
+      // Firefox
+      e.code === 1014 ||
+      // test name field too, because code might not be present
+      // everything except Firefox
+      e.name === 'QuotaExceededError' ||
+      // Firefox
+      e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
+      // acknowledge QuotaExceededError only if there's something already stored
+      (storage && storage.length !== 0);
+  }
+}
 
 
 // DOM manipulation
@@ -140,6 +168,11 @@ const showProjects = () => {
       editIcon.classList.add('ghost')
     })
   }
+
+  if (storageAvailable('localStorage')) {
+    localStorage.setItem('projects_store', JSON.stringify(projects))
+  }
+
 }
 
 const nthParent = (elem, n) => {
@@ -207,8 +240,8 @@ document.querySelector('main').addEventListener('click', function (e) {
 
 
 
-  if(matchTarget(e, '.description-submit') && taskTextArea.value.length > 0){
-     setTaskValue("description", taskTextArea)
+  if (matchTarget(e, '.description-submit') && taskTextArea.value.length > 0) {
+    setTaskValue("description", taskTextArea)
     let taskDescription = document.querySelector('.task-description p')
     taskDescription.innerHTML = taskTextArea.value
 
@@ -336,7 +369,7 @@ document.querySelector('main').addEventListener('click', function (e) {
 
   // set task description
 
-  
+
 
   if (matchTarget(e, '.task-textarea')) {
     document.querySelector('main').addEventListener('keyup', function (k) {
@@ -363,7 +396,7 @@ document.querySelector('main').addEventListener('click', function (e) {
   // set task-priority
 
   if (matchTarget(e, '.task-priority input[name="taskPriority"]')) {
-      setTaskValue("priority", e.target.value)
+    setTaskValue("priority", e.target.value)
   }
 
   // close task edit
@@ -372,19 +405,11 @@ document.querySelector('main').addEventListener('click', function (e) {
     taskModal.classList.toggle('hide')
   }
 
-  // if (matchTarget(e, '.date-input')) {
-  //   if (e.target.value.length > 4) {
-  //     console.log(e.target.value)
-  //   }
-  //   setTaskValue("dueDate", e.target.value)
-
-  // }
-
 })
 
 const dueDate = document.querySelector('.date-input')
 
-dueDate.addEventListener('change', (e)=>{
+dueDate.addEventListener('change', (e) => {
   const taskIndicies = taskModal.getAttribute('pt-indices').split(',').map(Number)
   let [projIndex, taskIndex] = [...taskIndicies]
   let taskProp = projects[projIndex]["tasks"][taskIndex]
@@ -403,11 +428,12 @@ dueDate.addEventListener('change', (e)=>{
 
 // development data
 
-const demoProj = newProject('Project 1')
-projects.push(demoProj)
+// const demoProj = newProject('Project 1')
+// projects.push(demoProj)
 
-const demotask = newTask('task 1')
-demoProj.tasks.push(demotask)
+// const demotask = newTask('task 1')
+// demoProj.tasks.push(demotask)
+
 
 
 showProjects()
