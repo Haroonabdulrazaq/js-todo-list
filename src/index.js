@@ -186,6 +186,7 @@ createProject.addEventListener('click', (e) => {
 })
 
 const taskModal = document.querySelector('.edit-task')
+const taskTextArea = document.querySelector('.task-textarea')
 
 document.querySelector('main').addEventListener('click', function (e) {
 
@@ -195,6 +196,25 @@ document.querySelector('main').addEventListener('click', function (e) {
     return (event.target && event.target.matches(target))
   }
 
+  // locates task object in projects array and sets value
+
+  const setTaskValue = (taskKey, taskValue) => {
+    const taskIndicies = taskModal.getAttribute('pt-indices').split(',').map(Number)
+    let [projIndex, taskIndex] = [...taskIndicies]
+    projects[projIndex]["tasks"][taskIndex][taskKey] = taskValue
+  }
+
+
+
+  if(matchTarget(e, '.description-submit') && taskTextArea.value.length > 0){
+     setTaskValue("description", taskTextArea)
+    let taskDescription = document.querySelector('.task-description p')
+    taskDescription.innerHTML = taskTextArea.value
+
+    taskTextArea.classList.add('hide')
+    showProjects()
+
+  }
 
   // Checkbox completed 
   if (matchTarget(e, '.task-checkbox')) {
@@ -285,17 +305,6 @@ document.querySelector('main').addEventListener('click', function (e) {
     showProjects()
   }
 
-  // locates task object in projects array and sets value
-
-  const setTaskValue = (taskKey, taskValue) => {
-    const taskIndicies = taskModal.getAttribute('pt-indices').split(',').map(Number)
-    let [projIndex, taskIndex] = [...taskIndicies]
-    projects[projIndex]["tasks"][taskIndex][taskKey] = taskValue
-  }
-
-
-
-
   let taskInput = document.querySelector('.task-title input')
 
   if (matchTarget(e, '.task-title .title')) {
@@ -326,7 +335,7 @@ document.querySelector('main').addEventListener('click', function (e) {
 
   // set task description
 
-  const taskTextArea = document.querySelector('.task-textarea')
+  
 
   if (matchTarget(e, '.task-textarea')) {
     document.querySelector('main').addEventListener('keyup', function (k) {
