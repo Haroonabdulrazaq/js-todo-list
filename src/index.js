@@ -49,9 +49,10 @@ const newProject = (title) => ({
 })
 
 // list containing projects
-const projects = []
-const projectList = document.querySelector('.project-list');
 
+const projects = localStorage.getItem('projects_store') ? JSON.parse(localStorage.getItem('projects_store')) : []
+//const projects = []
+const projectList = document.querySelector('.project-list');
 
 
 
@@ -141,16 +142,16 @@ const showProjects = () => {
       editIcon.classList.add('ghost')
     })
   }
+
+  if (storageAvailable('localStorage')) {
+    localStorage.setItem('projects_store', JSON.stringify(projects))
+  }
+
 }
 
 const nthParent = (elem, n) => {
   return n === 0 ? elem : nthParent(elem.parentNode, n - 1);
 }
-
-
-
-
-
 
 
 // module structure: tasks, projects, UI
@@ -208,8 +209,8 @@ document.querySelector('main').addEventListener('click', function (e) {
 
 
 
-  if(matchTarget(e, '.description-submit') && taskTextArea.value.length > 0){
-     setTaskValue("description", taskTextArea)
+  if (matchTarget(e, '.description-submit') && taskTextArea.value.length > 0) {
+    setTaskValue("description", taskTextArea)
     let taskDescription = document.querySelector('.task-description p')
     taskDescription.innerHTML = taskTextArea.value
 
@@ -337,8 +338,6 @@ document.querySelector('main').addEventListener('click', function (e) {
 
   // set task description
 
-  
-
   if (matchTarget(e, '.task-textarea')) {
     document.querySelector('main').addEventListener('keyup', function (k) {
       k.preventDefault();
@@ -364,7 +363,7 @@ document.querySelector('main').addEventListener('click', function (e) {
   // set task-priority
 
   if (matchTarget(e, '.task-priority input[name="taskPriority"]')) {
-      setTaskValue("priority", e.target.value)
+    setTaskValue("priority", e.target.value)
   }
 
   // close task edit
@@ -377,7 +376,7 @@ document.querySelector('main').addEventListener('click', function (e) {
 
 const dueDate = document.querySelector('.date-input')
 
-dueDate.addEventListener('change', (e)=>{
+dueDate.addEventListener('change', (e) => {
   const taskIndicies = taskModal.getAttribute('pt-indices').split(',').map(Number)
   let [projIndex, taskIndex] = [...taskIndicies]
   let taskProp = projects[projIndex]["tasks"][taskIndex]
@@ -396,10 +395,11 @@ dueDate.addEventListener('change', (e)=>{
 
 // development data
 
-const demoProj = newProject('Project 1')
-projects.push(demoProj)
+// const demoProj = newProject('Project 1')
+// projects.push(demoProj)
 
-const demotask = newTask('task 1')
-demoProj.tasks.push(demotask)
+// const demotask = newTask('task 1')
+// demoProj.tasks.push(demotask)
+
 
  showProjects()
