@@ -143,19 +143,24 @@ const showProjects = () => {
   projects.forEach(displayProject)
 
   if (projects.length > 0) {
-    const _project = document.querySelector('.project')
-    const editProj = _project.querySelector('.edit-project')
+    const _project = document.querySelectorAll('.project');
+    const editProj = document.querySelector('.edit-project')
 
-    _project.addEventListener('mouseover', e => {
-      editProj.classList.remove('ghost')
+    _project.forEach(function(el){
+      el.addEventListener('mouseover', e => {
+        editProj.classList.remove('ghost')
+      })
+    })
+    
+    _project.forEach(function(el){
+      el.addEventListener('mouseleave', e => {
+        editProj.classList.add('ghost')
+      })
     })
 
-    _project.addEventListener('mouseleave', e => {
-      editProj.classList.add('ghost')
-    })
   }
 
-  if (projects.length > 0 && projects[0].tasks.length > 0) {
+  if (projects.length > 0 && projects.tasks.length > 0) {
     const taskItem = document.querySelector('.task-item .task-div')
     const editIcon = taskItem.querySelector('.fa-edit')
 
