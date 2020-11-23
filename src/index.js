@@ -363,6 +363,9 @@ document.querySelector('main').addEventListener('click', function (e) {
 
     if (taskModal.classList.contains('hide')) {
       taskModal.removeAttribute('pt-indices')
+    }else{
+     let dateInput = document.querySelector('.date-input')
+     dateInput.value = task.dueDate
     }
 
     showProjects()
@@ -444,6 +447,7 @@ dueDate.addEventListener('change', (e) => {
   let [projIndex, taskIndex] = [...taskIndicies]
   let taskProp = projects[projIndex]["tasks"][taskIndex]
   taskProp["dueDate"] = e.target.value
+   console.log(taskProp)
 })
 
 
