@@ -319,24 +319,33 @@ document.querySelector('main').addEventListener('click', function (e) {
 
   // show/hide task modal
 
-  if (matchTarget(e, '.task-div p') || matchTarget(e, '.task-div i')) {
+  if (matchTarget(e, '.task-div p') || matchTarget(e, '.task-div .fa-edit')) {
     const taskIndex = e.target.parentNode.getAttribute('t-index')
     const projIndex = nthParent(e.target, 5).getAttribute('p-index')
     const project = projects[projIndex]
     const task = project.tasks[taskIndex]
     const taskTitle = document.querySelector('.task-title h3')
     const taskDesc = document.querySelector('.task-description p')
+    const taskDescInput = document.querySelector('.task-description textarea')
 
 
     taskModal.classList.toggle('hide')
     taskModal.setAttribute('pt-indices', `${projIndex}, ${taskIndex}`)
 
-    console.log(task)
 
     if (task.description.length > 0) {
-      console.log(task.description)
+      taskDescInput.classList.add('hide')
+      taskDescInput.value = ''
       taskDesc.innerHTML = task.description
+      console.log('len > 0')
+    } else {
+      taskDescInput.classList.remove('hide')
+      taskDescInput.value = ''
+      taskDesc.innerHTML = ''
+      console.log('len = 0')
     }
+
+    console.log(task)
 
     taskTitle.innerHTML = `Task: ${task.title}`
 
@@ -351,7 +360,6 @@ document.querySelector('main').addEventListener('click', function (e) {
 
   if (matchTarget(e, '.task-title .title')) {
     taskInput.classList.remove('hide')
-    console.log(projects)
   }
 
   // set task title
@@ -385,7 +393,7 @@ document.querySelector('main').addEventListener('click', function (e) {
       // TODO: change from enter or key-up to button
       if (k.key === 'Enter' && taskTextArea.value.length > 0) {
 
-        setTaskValue("description", taskTextArea)
+        setTaskValue("description", taskTextArea.value)
         let taskDescription = document.querySelector('.task-description p')
         taskDescription.innerHTML = taskTextArea.value
 
@@ -399,6 +407,7 @@ document.querySelector('main').addEventListener('click', function (e) {
 
   if (matchTarget(e, '.task-description p')) {
     taskTextArea.classList.toggle('hide')
+    taskTextArea.value = ''
   }
 
   // set task-priority
