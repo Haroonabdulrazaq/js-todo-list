@@ -337,15 +337,20 @@ document.querySelector('main').addEventListener('click', function (e) {
       taskDescInput.classList.add('hide')
       taskDescInput.value = ''
       taskDesc.innerHTML = task.description
-      console.log('len > 0')
     } else {
       taskDescInput.classList.remove('hide')
       taskDescInput.value = ''
       taskDesc.innerHTML = ''
-      console.log('len = 0')
     }
 
-    console.log(task)
+
+    if (task.priority) {
+      document.querySelector(`input#${task.priority}`).click()
+    } else {
+      ['High', 'Medium', 'Low'].forEach(p => {
+        document.querySelector(`input#${p}`).checked = false
+      })
+    }
 
     taskTitle.innerHTML = `Task: ${task.title}`
 
@@ -463,12 +468,15 @@ dueDate.addEventListener('change', (e) => {
 
 // development data
 
-// const demoProj = newProject('Project 1')
-// projects.push(demoProj)
+const demoProj = newProject('Project 1')
+projects.push(demoProj)
 
-// const demotask = newTask('task 1')
-// demoProj.tasks.push(demotask)
+const demotask = newTask('task 1')
+demotask.priority = 'Medium'
+demoProj.tasks.push(demotask)
 
+const demotask2 = newTask('task 2')
+demoProj.tasks.push(demotask2)
 
 
 showProjects()
