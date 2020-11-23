@@ -242,10 +242,12 @@ document.querySelector('main').addEventListener('click', function (e) {
 
   if (matchTarget(e, '.description-submit') && taskTextArea.value.length > 0) {
     setTaskValue("description", taskTextArea)
+    let descSubmit = document.querySelector('.description-submit')
     let taskDescription = document.querySelector('.task-description p')
     taskDescription.innerHTML = taskTextArea.value
 
     taskTextArea.classList.add('hide')
+    descSubmit.classList.add('hide')
     showProjects()
 
   }
@@ -336,9 +338,12 @@ document.querySelector('main').addEventListener('click', function (e) {
 
 
     if (task.description.length > 0) {
+      let descSubmit = document.querySelector('.description-submit')
+      // descSubmit.classList.add('hide')
       taskDescInput.classList.add('hide')
       taskDescInput.value = ''
       taskDesc.innerHTML = task.description
+     
     } else {
       taskDescInput.classList.remove('hide')
       taskDescInput.value = ''
@@ -404,7 +409,6 @@ document.querySelector('main').addEventListener('click', function (e) {
         let taskDescription = document.querySelector('.task-description p')
         taskDescription.innerHTML = taskTextArea.value
 
-        taskTextArea.classList.add('hide')
         showProjects()
       }
     })
@@ -414,6 +418,8 @@ document.querySelector('main').addEventListener('click', function (e) {
 
   if (matchTarget(e, '.task-description p')) {
     taskTextArea.classList.toggle('hide')
+    let descSubmit = document.querySelector('.description-submit')
+    descSubmit.classList.toggle('hide')
     taskTextArea.value = ''
   }
 
@@ -450,8 +456,6 @@ dueDate.addEventListener('change', (e) => {
 // confirmation when deleting project with custom modal
 
 // visual display of priority and due-date
-
-// task delete not working
 
 // task description button needs to hide
 
