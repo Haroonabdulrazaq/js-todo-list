@@ -94,9 +94,9 @@ const displayProject = (project) => {
   const projectTitle = helpr.textEl('h3', project.title)
   const projectDel = helpr.createTag('i', 'del-project fa fa-trash')
 
-  const projectEdit = helpr.createTag('i', 'edit-project fa fa-edit ghost')
+  const projectEdit = helpr.createTag('i', 'edit-project fa fa-edit')
 
-  const editInput = helpr.createTag('input', 'edit-input')
+  const editInput = helpr.createTag('input', 'edit-input input')
   editInput.classList.add('hide')
   editInput.setAttribute('placeholder', 'Enter new title here')
 
@@ -129,7 +129,7 @@ const displayProject = (project) => {
 
     taskDiv.setAttribute('t-index', index)
     const taskTitle = helpr.textEl('p', el.title)
-    const taskEdit = helpr.createTag('i', 'fa fa-edit ghost')
+    const taskEdit = helpr.createTag('i', 'fa fa-edit')
     const taskDel = helpr.createTag('i', 'fa fa-trash')
     // taskDel.innerHTML = 'Delete Task'
     helpr.addChildren(taskDiv, [taskCheckbox, taskTitle, taskEdit, taskDel])
@@ -142,36 +142,31 @@ const showProjects = () => {
   document.querySelector('.project-list').innerHTML = ''
   projects.forEach(displayProject)
 
-  if (projects.length > 0) {
-    const _project = document.querySelectorAll('.project');
-    const editProj = document.querySelector('.edit-project')
+  // if (projects.length > 0) {
+  //   const _project = document.querySelector('.project')
+  //   const editProj = _project.querySelector('.edit-project')
 
-    _project.forEach(function(el){
-      el.addEventListener('mouseover', e => {
-        editProj.classList.remove('ghost')
-      })
-    })
-    
-    _project.forEach(function(el){
-      el.addEventListener('mouseleave', e => {
-        editProj.classList.add('ghost')
-      })
-    })
+  //   _project.addEventListener('mouseover', e => {
+  //     editProj.classList.remove('ghost')
+  //   })
 
-  }
+  //   _project.addEventListener('mouseleave', e => {
+  //     editProj.classList.add('ghost')
+  //   })
+  // }
 
-  if (projects.length > 0 && projects[0].tasks.length > 0) {
-    const taskItem = document.querySelector('.task-item .task-div')
-    const editIcon = taskItem.querySelector('.fa-edit')
+  // if (projects.length > 0 && projects[0].tasks.length > 0) {
+  //   const taskItem = document.querySelector('.task-item .task-div')
+  //   const editIcon = taskItem.querySelector('.fa-edit')
 
-    taskItem.addEventListener('mouseover', e => {
-      editIcon.classList.remove('ghost')
-    })
+  //   taskItem.addEventListener('mouseover', e => {
+  //     editIcon.classList.remove('ghost')
+  //   })
 
-    taskItem.addEventListener('mouseleave', e => {
-      editIcon.classList.add('ghost')
-    })
-  }
+  //   taskItem.addEventListener('mouseleave', e => {
+  //     editIcon.classList.add('ghost')
+  //   })
+  // }
 
   if (storageAvailable('localStorage')) {
     localStorage.setItem('projects_store', JSON.stringify(projects))
@@ -330,9 +325,18 @@ document.querySelector('main').addEventListener('click', function (e) {
     const project = projects[projIndex]
     const task = project.tasks[taskIndex]
     const taskTitle = document.querySelector('.task-title h3')
+    const taskDesc = document.querySelector('.task-description p')
+
 
     taskModal.classList.toggle('hide')
     taskModal.setAttribute('pt-indices', `${projIndex}, ${taskIndex}`)
+
+    console.log(task)
+
+    if (task.description.length > 0) {
+      console.log(task.description)
+      taskDesc.innerHTML = task.description
+    }
 
     taskTitle.innerHTML = `Task: ${task.title}`
 
@@ -423,7 +427,7 @@ dueDate.addEventListener('change', (e) => {
 
 // ISSUES TO FIX:
 
-// project/task edit icons only showing on first item
+// project/task edit icons only showing on first item - resolved
 
 // task-modal does update when working with multiple tasks
 
@@ -432,6 +436,8 @@ dueDate.addEventListener('change', (e) => {
 // visual display of priority and due-date
 
 // task delete not working
+
+// task description button needs to hide
 
 // webpack
 
