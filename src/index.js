@@ -160,7 +160,7 @@ const showProjects = () => {
 
   }
 
-  if (projects.length > 0 && projects.tasks.length > 0) {
+  if (projects.length > 0 && projects[0].tasks.length > 0) {
     const taskItem = document.querySelector('.task-item .task-div')
     const editIcon = taskItem.querySelector('.fa-edit')
 
