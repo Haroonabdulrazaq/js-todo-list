@@ -447,8 +447,8 @@ dueDate.addEventListener('change', (e) => {
   let [projIndex, taskIndex] = [...taskIndicies]
   let taskProp = projects[projIndex]["tasks"][taskIndex]
   taskProp["dueDate"] = e.target.value
-   console.log(taskProp)
 })
+
 
 
 // ISSUES TO FIX:
