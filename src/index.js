@@ -135,6 +135,7 @@ const displayProject = (project) => {
     helpr.addChildren(taskDiv, [taskCheckbox, taskTitle, taskEdit, taskDel])
     taskItem.appendChild(taskDiv)
     taskList.appendChild(taskItem)
+
   })
 }
 
@@ -284,6 +285,7 @@ document.querySelector('main').addEventListener('click', function (e) {
     }
   }
 
+
   // submit task button
 
   if (matchTarget(e, 'input.task-submit')) {
@@ -304,7 +306,7 @@ document.querySelector('main').addEventListener('click', function (e) {
 
   // delete task button
 
-  if (matchTarget(e, 'button.del-task')) {
+  if (matchTarget(e, '.task-item .fa-trash')) {
     const taskIndex = e.target.parentNode.getAttribute('t-index')
     const taskList = nthParent(e.target, 2).firstChild
     const taskItem = nthParent(e.target, 2)
