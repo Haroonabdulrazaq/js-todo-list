@@ -455,13 +455,13 @@ dueDate.addEventListener('change', (e) => {
 
 // project/task edit icons only showing on first item - resolved
 
-// task-modal does update when working with multiple tasks
+// task-modal does update when working with multiple tasks - resolved
 
-// confirmation when deleting project with custom modal
+// confirmation when deleting project with custom modal 
 
-// visual display of priority and due-date
+// visual display of priority and due-date - resolved
 
-// task description button needs to hide
+// task description button needs to hide  - resolved
 
 // webpack
 
