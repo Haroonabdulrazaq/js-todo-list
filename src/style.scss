@@ -6,6 +6,10 @@ main {
   background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
+input[type='text'] {
+  margin-top: 15px;
+}
+
 .hide {
   display: none;
 }
@@ -122,6 +126,7 @@ main {
   margin: 0 auto; 
   left: 33%;
   width: 33%;
+  border-radius: 12px;
   top: 12vh;
   background-color: #fff;
   padding: 1rem 2rem 2rem;
@@ -152,7 +157,7 @@ main {
 }
 
 
-.confirm-delete {
+.confirm-delete {  
   background-color: #fff;
   position: fixed;
   top: 12vh;

@@ -1,85 +1,13 @@
-//import helpr from './helpers'
-
-const helpr = (() => {
-  const addChildren = (parent, items) => {
-    items.forEach(el => {
-      parent.appendChild(el);
-    });
-  };
-
-  const textEl = (elType, elText) => {
-    const res = document.createElement(elType);
-    res.innerHTML = elText;
-
-    return res;
-  };
-
-  const classyDiv = (className) => {
-    const res = document.createElement('div');
-    res.setAttribute('class', className);
-
-    return res;
-  };
-
-  const createTag = (el, className = '') => {
-    const res = document.createElement(el);
-    if (className != '') {
-      res.setAttribute('class', className);
-    }
-    return res;
-  }
-
-  return { addChildren, textEl, classyDiv, createTag };
-})();
+import helpr from './helpers'
+import newTask from './task'
+import newProject from './project'
 
 
-const newTask = (title, description = '', dueDate = '', priority = '', completed = false, project = 'default') => ({
-  title: title,
-  description: description,
-  dueDate: dueDate,
-  priority: priority,
-  completed: completed,
-  project: 'default'
-})
-
-// title (str), tasks (array)
-const newProject = (title) => ({
-  title: title,
-  tasks: []
-})
-
-// list containing projects
+// project array with check for local storage
 
 const projects = localStorage.getItem('projects_store') ? JSON.parse(localStorage.getItem('projects_store')) : []
 const projectList = document.querySelector('.project-list');
 
-
-// get local storage
-
-const storageAvailable = (type) => {
-  var storage;
-  try {
-    storage = window[type];
-    var x = '__storage_test__';
-    storage.setItem(x, x);
-    storage.removeItem(x);
-    return true;
-  }
-  catch (e) {
-    return e instanceof DOMException && (
-      // everything except Firefox
-      e.code === 22 ||
-      // Firefox
-      e.code === 1014 ||
-      // test name field too, because code might not be present
-      // everything except Firefox
-      e.name === 'QuotaExceededError' ||
-      // Firefox
-      e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
-      // acknowledge QuotaExceededError only if there's something already stored
-      (storage && storage.length !== 0);
-  }
-}
 
 
 // DOM manipulation
@@ -104,7 +32,8 @@ const displayProject = (project) => {
   const taskDiv = document.createElement('div')
 
   const taskForm = document.createElement('form')
-  let textIn = helpr.createTag('input', 'input')//document.createElement('input')
+  let textIn = helpr.createTag('input', 'input')
+  textIn.setAttribute('placeholder', 'Enter a new task here')
   textIn.setAttribute('type', 'text')
 
 
@@ -169,7 +98,7 @@ const showProjects = () => {
   //   })
   // }
 
-  if (storageAvailable('localStorage')) {
+  if (helpr.storageAvailable('localStorage')) {
     localStorage.setItem('projects_store', JSON.stringify(projects))
   }
 
@@ -343,7 +272,7 @@ document.querySelector('main').addEventListener('click', function (e) {
       taskDescInput.classList.add('hide')
       taskDescInput.value = ''
       taskDesc.innerHTML = task.description
-     
+
     } else {
       taskDescInput.classList.remove('hide')
       taskDescInput.value = ''
@@ -363,9 +292,9 @@ document.querySelector('main').addEventListener('click', function (e) {
 
     if (taskModal.classList.contains('hide')) {
       taskModal.removeAttribute('pt-indices')
-    }else{
-     let dateInput = document.querySelector('.date-input')
-     dateInput.value = task.dueDate
+    } else {
+      let dateInput = document.querySelector('.date-input')
+      dateInput.value = task.dueDate
     }
 
     showProjects()
@@ -459,9 +388,9 @@ dueDate.addEventListener('change', (e) => {
 
 // confirmation when deleting project with custom modal 
 
-// visual display of priority and due-date - resolved
+// visual display of priority, due-date or task properties 
 
-// task description button needs to hide  - resolved
+// does task completion do anything - does task object react to checkbox interaction
 
 // webpack
 

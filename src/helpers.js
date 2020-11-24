@@ -19,14 +19,40 @@ const helpr = (() => {
     return res;
   };
 
-  const createTag = (el, className) =>{
-    const tag = document.createElement(el);
-    tag.setAttribute('class', className);
-
-    return tag;
+  const createTag = (el, className = '') => {
+    const res = document.createElement(el);
+    if (className != '') {
+      res.setAttribute('class', className);
+    }
+    return res;
   }
 
-  return { addChildren, textEl, classyDiv, createTag };
+  const storageAvailable = (type) => {
+    var storage;
+    try {
+      storage = window[type];
+      var x = '__storage_test__';
+      storage.setItem(x, x);
+      storage.removeItem(x);
+      return true;
+    }
+    catch (e) {
+      return e instanceof DOMException && (
+        // everything except Firefox
+        e.code === 22 ||
+        // Firefox
+        e.code === 1014 ||
+        // test name field too, because code might not be present
+        // everything except Firefox
+        e.name === 'QuotaExceededError' ||
+        // Firefox
+        e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
+        // acknowledge QuotaExceededError only if there's something already stored
+        (storage && storage.length !== 0);
+    }
+  }
+
+  return { addChildren, textEl, classyDiv, createTag, storageAvailable };
 })();
 
 export default helpr;
