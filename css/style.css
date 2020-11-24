@@ -158,3 +158,21 @@ main {
 .edit-task .close-edit:hover {
   cursor: pointer;
 }
+
+.confirm-delete {
+  background-color: #fff;
+  position: fixed;
+  top: 12vh;
+  margin: 0 auto;
+  padding: 1.5rem;
+  width: 40%;
+  left: 30%;
+  text-align: center;
+  border-radius: 12px;
+  -webkit-box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.02);
+          box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.02);
+}
+
+.confirm-delete p {
+  margin-bottom: 1rem;
+}
