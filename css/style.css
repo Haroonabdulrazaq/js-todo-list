@@ -2,8 +2,9 @@ main {
   min-height: 100vh;
   height: auto;
   background: #7f7fd5;
+  /* fallback for old browsers */
+  background: -webkit-gradient(linear, left top, right top, from(#91eae4), color-stop(#86a8e7), to(#7f7fd5));
   background: linear-gradient(to right, #91eae4, #86a8e7, #7f7fd5);
-
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
@@ -43,14 +44,16 @@ input[type='text'] {
 }
 
 .task-div {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   margin: 10px auto;
   -webkit-box-pack: start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
   -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .task-div * {
@@ -154,7 +157,7 @@ input[type='text'] {
   background-color: #fff;
   padding: 1rem 2rem 2rem;
   -webkit-box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.02);
-  box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.02);
+          box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.02);
 }
 
 .edit-task .task-title h3,
@@ -181,6 +184,10 @@ input[type='text'] {
   cursor: pointer;
 }
 
+.edit-task .task-description:hover {
+  cursor: pointer;
+}
+
 .confirm-delete {
   background-color: #fff;
   position: fixed;
@@ -192,7 +199,7 @@ input[type='text'] {
   text-align: center;
   border-radius: 12px;
   -webkit-box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.02);
-  box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.02);
+          box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.02);
 }
 
 .confirm-delete p {

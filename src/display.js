@@ -24,7 +24,7 @@ const display = (() => {
 
     const taskForm = document.createElement('form');
     const textIn = helpr.createTag('input', 'input');
-    textIn.setAttribute('placeholder', 'Enter a new task here');
+    textIn.setAttribute('placeholder', 'Enter a new task here + ENTER to save');
     textIn.setAttribute('type', 'text');
 
 

@@ -42,7 +42,6 @@ const initUI = (projects) => {
   const taskTextArea = document.querySelector('.task-textarea');
 
   document.querySelector('main').addEventListener('click', (e) => {
-    // TODO : renderTasks function
 
     const matchTarget = (event, target) => (event.target && event.target.matches(target));
 
@@ -131,7 +130,7 @@ const initUI = (projects) => {
       const projIndex = helpr.nthParent(e.target, 3).getAttribute('p-index');
       const project = projects[projIndex];
 
-      if (taskInput.length !== '') {
+      if (taskInput.length > 0) {
         const task = newTask(taskInput);
         project.tasks.push(task);
 
@@ -148,6 +147,8 @@ const initUI = (projects) => {
       const project = projects[projIndex];
       project.tasks.splice(taskIndex, 1);
       taskItem.remove();
+
+      display.showProjects(projects);
     }
 
     // edit task
@@ -245,13 +246,26 @@ const initUI = (projects) => {
     }
 
     // show/hide task-description input
+    const descSubmit = document.querySelector('.description-submit');
 
     if (matchTarget(e, '.task-description p')) {
+
+
+      let classArr = [...taskTextArea.classList]
+
+      if (classArr.includes('hide')) {
+        descSubmit.classList.remove('hide')
+      } else {
+        descSubmit.classList.add('hide')
+      }
+
       taskTextArea.classList.toggle('hide');
-      const descSubmit = document.querySelector('.description-submit');
-      descSubmit.classList.toggle('hide');
       taskTextArea.value = '';
     }
+
+
+
+
 
     // set task-priority
 
