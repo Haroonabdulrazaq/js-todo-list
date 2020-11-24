@@ -20,6 +20,7 @@
 - Javascript
 - Sass
 - [Bulma.io](https://bulma.io)
+- Webpack 5
 
 ### Webpack Setup
 
@@ -41,6 +42,18 @@ To get a local copy up and running follow these simple example steps.
 4.  Install the LiveServer Extension on VSCode.
 5.  Once installed hit the "Go Live" button on the bottom right hand of your editor.
 6.  The application should automatically open in a browser window.
+
+
+### Webpack SetUp
+- npm install [To install all dependencies]
+- npm run build [To bundle the files]
+- npm run watch [To update as you make changes]
+
+
+
+### Deploy
+
+- Github pages
 
 
 ## Authors
