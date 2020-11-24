@@ -12,7 +12,7 @@
 
 ## Live Link
 
-[ToDo List](https://raw.githack.com/Haroonabdulrazaq/js-todo-list/feature/dist/index.html)
+[ToDo List](https://raw.githack.com/Haroonabdulrazaq/js-todo-list/develop/dist/index.html)
 
 ## Built With
 
