@@ -10,12 +10,22 @@
  - object and DOM logic are separate
  - user can view projects, view todos in projects, expand tasks to see details, projects and todos have CRUD functionality
 
+## Live Link
+
+[ToDo List](https://raw.githack.com/Haroonabdulrazaq/js-todo-list/feature/dist/index.html)
+
 ## Built With
 
 - HTML
 - Javascript
 - Sass
 - [Bulma.io](https://bulma.io)
+
+### Webpack Setup
+
+- npm install [To install all dependencies]
+- npm run build [To bundle the files]
+- npm run watch [To update as you make changes]
 
 
 ## Getting Started
@@ -44,7 +54,6 @@ To get a local copy up and running follow these simple example steps.
 👤 **Mark Rode**
 
 - Github: [@m15e](https://github.com/m15e)
-
 
 
 ## Show your support

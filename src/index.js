@@ -1,4 +1,3 @@
-import newTask from './task';
 import newProject from './project';
 import initUI from './ui';
 import display from './display';
