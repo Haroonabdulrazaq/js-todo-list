@@ -255,6 +255,21 @@ const initUI = (projects) => {
 
     if (matchTarget(e, '.task-priority input[name="taskPriority"]')) {
       setTaskValue("priority", e.target.value)
+       
+      console.log(taskPara)
+      switch(e.target.value){
+        case "High":
+          taskPara.style.color ="green"
+        break;
+        case "Medium":
+          taskPara.style.color ="blue"
+        break;
+        case "Low":
+          taskPara.style.color ="red"
+        break;
+        default :
+          taskDiv.style.color = "inherit"
+      }
     }
 
     // close task edit
