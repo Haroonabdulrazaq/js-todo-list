@@ -36,7 +36,7 @@ To get a local copy up and running follow these simple example steps.
 ### Webpack SetUp
 - npm install [To install all dependencies]
 - npm run build [To bundle the files]
-- npm watch [To update as you make changes]
+- npm run watch [To update as you make changes]
 
 
 
