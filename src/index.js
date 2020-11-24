@@ -1,81 +1,15 @@
 import helpr from './helpers'
 import newTask from './task'
 import newProject from './project'
-import displayProject from './display'
+import display from './display'
 
 // project array with check for local storage
 
 const projects = localStorage.getItem('projects_store') ? JSON.parse(localStorage.getItem('projects_store')) : []
-const projectList = document.querySelector('.project-list');
 
 
 
-// DOM manipulation
 
-// const displayProject = (project) => {
-//   const projDiv = helpr.classyDiv('project card')
-
-//   const idx = projects.indexOf(project)
-//   projDiv.setAttribute('p-index', idx)
-
-//   const projectTitle = helpr.textEl('h3', project.title)
-//   const projectDel = helpr.createTag('i', 'del-project fa fa-trash')
-
-//   const projectEdit = helpr.createTag('i', 'edit-project fa fa-edit')
-
-//   const editInput = helpr.createTag('input', 'edit-input input')
-//   editInput.classList.add('hide')
-//   editInput.setAttribute('placeholder', 'Enter new title here')
-
-//   const taskList = helpr.createTag('ul', 'task-list')
-//   const taskDiv = document.createElement('div')
-
-//   const taskForm = document.createElement('form')
-//   let textIn = helpr.createTag('input', 'input')
-//   textIn.setAttribute('placeholder', 'Enter a new task here')
-//   textIn.setAttribute('type', 'text')
-
-
-//   let taskSubmit = helpr.createTag('input', 'task-submit button mt-4 is-info')
-//   taskSubmit.setAttribute('type', 'submit')
-//   taskSubmit.setAttribute('value', 'Add Task')
-
-//   helpr.addChildren(taskForm, [textIn, taskSubmit])
-//   helpr.addChildren(taskDiv, [taskList, taskForm])
-//   helpr.addChildren(projDiv, [projectTitle, editInput, projectEdit, projectDel, taskDiv])
-//   projectList.appendChild(projDiv)
-
-
-//   project.tasks.forEach((el) => {
-//     const taskItem = helpr.createTag('li', 'task-item')
-//     const taskDiv = helpr.classyDiv('task-div')
-
-//     const taskCheckbox = helpr.createTag('input', 'task-checkbox')
-//     taskCheckbox.setAttribute('type', 'checkbox')
-
-//     const index = project.tasks.indexOf(el)
-
-//     taskDiv.setAttribute('t-index', index)
-//     const taskTitle = helpr.textEl('p', el.title)
-//     const taskEdit = helpr.createTag('i', 'fa fa-edit')
-//     const taskDel = helpr.createTag('i', 'fa fa-trash')
-//     helpr.addChildren(taskDiv, [taskCheckbox, taskTitle, taskEdit, taskDel])
-//     taskItem.appendChild(taskDiv)
-//     taskList.appendChild(taskItem)
-
-//   })
-// }
-
-const showProjects = () => {
-  document.querySelector('.project-list').innerHTML = ''
-  projects.forEach(p => {
-    displayProject(projects, p)
-  })
-
-  if (helpr.storageAvailable('localStorage')) {
-    localStorage.setItem('projects_store', JSON.stringify(projects))
-  }
-}
 
 
 
@@ -115,7 +49,7 @@ createProject.addEventListener('click', (e) => {
     let p = newProject(projectName)
     projects.push(p)
 
-    showProjects()
+    display.showProjects(projects)
   }
 })
 
@@ -148,7 +82,7 @@ document.querySelector('main').addEventListener('click', function (e) {
 
     taskTextArea.classList.add('hide')
     descSubmit.classList.add('hide')
-    showProjects()
+    display.showProjects(projects)
 
   }
 
@@ -166,7 +100,7 @@ document.querySelector('main').addEventListener('click', function (e) {
     const delIndex = e.target.parentNode.getAttribute('p-index')
     projects.splice(delIndex, 1)
 
-    showProjects()
+    display.showProjects(projects)
   }
 
   // edit project button
@@ -181,7 +115,7 @@ document.querySelector('main').addEventListener('click', function (e) {
         if (k.key === 'Enter' && editInput.value.length > 0) {
           projects[projectIndex].title = editInput.value
 
-          showProjects()
+          display.showProjects(projects)
         }
       })
     }
@@ -202,7 +136,7 @@ document.querySelector('main').addEventListener('click', function (e) {
       const task = newTask(taskInput)
       project.tasks.push(task)
 
-      showProjects()
+      display.showProjects(projects)
     }
   }
 
@@ -268,7 +202,7 @@ document.querySelector('main').addEventListener('click', function (e) {
       dateInput.value = task.dueDate
     }
 
-    showProjects()
+    display.showProjects(projects)
   }
 
   let taskInput = document.querySelector('.task-title input')
@@ -292,7 +226,7 @@ document.querySelector('main').addEventListener('click', function (e) {
         taskTitle.innerHTML = `Task: ${newTaskTitle}`
 
 
-        showProjects()
+        display.showProjects(projects)
       }
 
     })
@@ -312,7 +246,7 @@ document.querySelector('main').addEventListener('click', function (e) {
         let taskDescription = document.querySelector('.task-description p')
         taskDescription.innerHTML = taskTextArea.value
 
-        showProjects()
+        display.showProjects(projects)
       }
     })
   }
@@ -389,4 +323,4 @@ const demotask2 = newTask('task 2')
 demoProj.tasks.push(demotask2)
 
 
-showProjects()
+display.showProjects(projects)
