@@ -42,7 +42,6 @@ const initUI = (projects) => {
   const taskTextArea = document.querySelector('.task-textarea');
 
   document.querySelector('main').addEventListener('click', (e) => {
-
     const matchTarget = (event, target) => (event.target && event.target.matches(target));
 
     // locates task object in projects array and sets value
@@ -249,22 +248,17 @@ const initUI = (projects) => {
     const descSubmit = document.querySelector('.description-submit');
 
     if (matchTarget(e, '.task-description p')) {
-
-
-      let classArr = [...taskTextArea.classList]
+      const classArr = [...taskTextArea.classList];
 
       if (classArr.includes('hide')) {
-        descSubmit.classList.remove('hide')
+        descSubmit.classList.remove('hide');
       } else {
-        descSubmit.classList.add('hide')
+        descSubmit.classList.add('hide');
       }
 
       taskTextArea.classList.toggle('hide');
       taskTextArea.value = '';
     }
-
-
-
 
 
     // set task-priority
