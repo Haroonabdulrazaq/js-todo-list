@@ -15,7 +15,6 @@ const projectList = document.querySelector('.project-list');
 const displayProject = (project) => {
   const projDiv = helpr.classyDiv('project card')
 
-  // TEMP: for delete fn
   const idx = projects.indexOf(project)
   projDiv.setAttribute('p-index', idx)
 
@@ -60,7 +59,6 @@ const displayProject = (project) => {
     const taskTitle = helpr.textEl('p', el.title)
     const taskEdit = helpr.createTag('i', 'fa fa-edit')
     const taskDel = helpr.createTag('i', 'fa fa-trash')
-    // taskDel.innerHTML = 'Delete Task'
     helpr.addChildren(taskDiv, [taskCheckbox, taskTitle, taskEdit, taskDel])
     taskItem.appendChild(taskDiv)
     taskList.appendChild(taskItem)
@@ -72,41 +70,13 @@ const showProjects = () => {
   document.querySelector('.project-list').innerHTML = ''
   projects.forEach(displayProject)
 
-  // if (projects.length > 0) {
-  //   const _project = document.querySelector('.project')
-  //   const editProj = _project.querySelector('.edit-project')
-
-  //   _project.addEventListener('mouseover', e => {
-  //     editProj.classList.remove('ghost')
-  //   })
-
-  //   _project.addEventListener('mouseleave', e => {
-  //     editProj.classList.add('ghost')
-  //   })
-  // }
-
-  // if (projects.length > 0 && projects[0].tasks.length > 0) {
-  //   const taskItem = document.querySelector('.task-item .task-div')
-  //   const editIcon = taskItem.querySelector('.fa-edit')
-
-  //   taskItem.addEventListener('mouseover', e => {
-  //     editIcon.classList.remove('ghost')
-  //   })
-
-  //   taskItem.addEventListener('mouseleave', e => {
-  //     editIcon.classList.add('ghost')
-  //   })
-  // }
-
   if (helpr.storageAvailable('localStorage')) {
     localStorage.setItem('projects_store', JSON.stringify(projects))
   }
 
 }
 
-const nthParent = (elem, n) => {
-  return n === 0 ? elem : nthParent(elem.parentNode, n - 1);
-}
+
 
 
 
@@ -184,7 +154,7 @@ document.querySelector('main').addEventListener('click', function (e) {
   // Checkbox completed 
   if (matchTarget(e, '.task-checkbox')) {
     const taskIndex = e.target.parentNode.getAttribute('t-index')
-    const projIndex = nthParent(e.target, 5).getAttribute('p-index')
+    const projIndex = helpr.nthParent(e.target, 5).getAttribute('p-index')
     const project = projects[projIndex]["tasks"][taskIndex]
     project.completed = e.target.checked
   }
@@ -221,10 +191,10 @@ document.querySelector('main').addEventListener('click', function (e) {
 
   if (matchTarget(e, 'input.task-submit')) {
     e.preventDefault()
-    const tasks = nthParent(e.target, 2).firstChild
+    const tasks = helpr.nthParent(e.target, 2).firstChild
     const taskInput = e.target.parentNode.firstChild.value
-    const taskList = nthParent(e.target, 2).firstChild // selects .task-list
-    const projIndex = nthParent(e.target, 3).getAttribute('p-index')
+    const taskList = helpr.nthParent(e.target, 2).firstChild // selects .task-list
+    const projIndex = helpr.nthParent(e.target, 3).getAttribute('p-index')
     const project = projects[projIndex]
 
     if (taskInput.length != '') {
@@ -239,9 +209,9 @@ document.querySelector('main').addEventListener('click', function (e) {
 
   if (matchTarget(e, '.task-item .fa-trash')) {
     const taskIndex = e.target.parentNode.getAttribute('t-index')
-    const taskList = nthParent(e.target, 2).firstChild
-    const taskItem = nthParent(e.target, 2)
-    const projIndex = nthParent(e.target, 5).getAttribute('p-index')
+    const taskList = helpr.nthParent(e.target, 2).firstChild
+    const taskItem = helpr.nthParent(e.target, 2)
+    const projIndex = helpr.nthParent(e.target, 5).getAttribute('p-index')
     const project = projects[projIndex]
     project.tasks.splice(taskIndex, 1)
     taskItem.remove()
@@ -254,7 +224,7 @@ document.querySelector('main').addEventListener('click', function (e) {
 
   if (matchTarget(e, '.task-div p') || matchTarget(e, '.task-div .fa-edit')) {
     const taskIndex = e.target.parentNode.getAttribute('t-index')
-    const projIndex = nthParent(e.target, 5).getAttribute('p-index')
+    const projIndex = helpr.nthParent(e.target, 5).getAttribute('p-index')
     const project = projects[projIndex]
     const task = project.tasks[taskIndex]
     const taskTitle = document.querySelector('.task-title h3')

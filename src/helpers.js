@@ -52,7 +52,11 @@ const helpr = (() => {
     }
   }
 
-  return { addChildren, textEl, classyDiv, createTag, storageAvailable };
+  const nthParent = (elem, n) => {
+    return n === 0 ? elem : nthParent(elem.parentNode, n - 1);
+  }
+
+  return { addChildren, textEl, classyDiv, createTag, storageAvailable, nthParent };
 })();
 
 export default helpr;
