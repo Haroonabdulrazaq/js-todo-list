@@ -1,8 +1,8 @@
 // creates project object
 
 const newProject = (title) => ({
-  title: title,
-  tasks: []
-})
+  title,
+  tasks: [],
+});
 
-export default newProject
+export default newProject;
