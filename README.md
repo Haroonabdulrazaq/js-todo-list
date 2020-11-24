@@ -16,6 +16,7 @@
 - Javascript
 - Sass
 - [Bulma.io](https://bulma.io)
+- Webpack 5
 
 
 ## Getting Started
