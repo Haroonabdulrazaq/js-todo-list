@@ -14,8 +14,9 @@ input[type='text'] {
   display: none;
 }
 
-.ghost {
-  opacity: 0;
+.linethrough {
+  color:red;
+  text-decoration: line-through;
 }
 
 .add-project {

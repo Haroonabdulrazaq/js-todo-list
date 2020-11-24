@@ -9,12 +9,16 @@ main {
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
+input[type='text'] {
+  margin-top: 15px;
+}
+
 .hide {
   display: none;
 }
 
-.ghost {
-  opacity: 0;
+.linethrough {
+  text-decoration: line-through;
 }
 
 .add-project {
@@ -130,6 +134,7 @@ main {
   margin: 0 auto;
   left: 33%;
   width: 33%;
+  border-radius: 12px;
   top: 12vh;
   background-color: #fff;
   padding: 1rem 2rem 2rem;
@@ -160,7 +165,20 @@ main {
 }
 
 .confirm-delete {
-  width: 50%;
-  border: 5px solid black;
+  background-color: #fff;
+  position: fixed;
+  top: 12vh;
+  margin: 0 auto;
+  padding: 1.5rem;
+  width: 40%;
+  left: 30%;
+  text-align: center;
+  border-radius: 12px;
+  -webkit-box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.02);
+          box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.02);
+}
+
+.confirm-delete p {
+  margin-bottom: 1rem;
 }
 /*# sourceMappingURL=style.css.map */

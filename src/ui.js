@@ -74,8 +74,14 @@ const initUI = (projects) => {
     if (matchTarget(e, '.task-checkbox')) {
       const taskIndex = e.target.parentNode.getAttribute('t-index')
       const projIndex = helpr.nthParent(e.target, 5).getAttribute('p-index')
-      const project = projects[projIndex]["tasks"][taskIndex]
-      project.completed = e.target.checked
+      const task = projects[projIndex]["tasks"][taskIndex]
+      task.completed = e.target.checked
+      let taskPara = e.target.parentNode.querySelector('p')
+      if(task.completed){
+        taskPara.classList.add('linethrough')
+      }else{
+        taskPara.classList.remove('linethrough')
+      }
     }
 
     // delete project button
