@@ -1,11 +1,9 @@
 main {
   min-height: 100vh;
   height: auto;
-  background: #7F7FD5;
-  /* fallback for old browsers */
-  /* Chrome 10-25, Safari 5.1-6 */
-  background: -webkit-gradient(linear, left top, right top, from(#91EAE4), color-stop(#86A8E7), to(#7F7FD5));
-  background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
+  background: #7f7fd5;
+  background: linear-gradient(to right, #91eae4, #86a8e7, #7f7fd5);
+
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
@@ -45,16 +43,14 @@ input[type='text'] {
 }
 
 .task-div {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   margin: 10px auto;
   -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .task-div * {
@@ -112,7 +108,8 @@ input[type='text'] {
   margin-bottom: 5px;
 }
 
-.project-list .project button, .project-list .project input {
+.project-list .project button,
+.project-list .project input {
   margin-right: 5px;
 }
 
@@ -157,24 +154,26 @@ input[type='text'] {
   background-color: #fff;
   padding: 1rem 2rem 2rem;
   -webkit-box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.02);
-          box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.02);
+  box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.02);
 }
 
-.edit-task .task-title h3, .edit-task .task-title input {
+.edit-task .task-title h3,
+.edit-task .task-title input {
   margin-bottom: 1rem;
 }
 
 .edit-task span {
   position: relative;
   left: 27vw;
-  top: 0px;
+  top: 0;
 }
 
 .edit-task .task-textarea {
   padding: 10px;
 }
 
-.edit-task .task-description, .edit-task .task-priority {
+.edit-task .task-description,
+.edit-task .task-priority {
   margin-bottom: 20px;
 }
 
@@ -193,7 +192,7 @@ input[type='text'] {
   text-align: center;
   border-radius: 12px;
   -webkit-box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.02);
-          box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.02);
+  box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.02);
 }
 
 .confirm-delete p {
