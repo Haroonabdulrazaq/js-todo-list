@@ -44,3 +44,6 @@ demoProj.tasks.push(demotask2)
 
 
 display.showProjects(projects)
+
+//Strike through
+// Confirmation before destroying

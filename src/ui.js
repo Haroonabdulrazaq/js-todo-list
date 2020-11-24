@@ -198,12 +198,13 @@ const initUI = (projects) => {
     // set task title
 
     if (!taskInput.classList.contains('hide')) {
+      taskInput.value = ''
       document.querySelector('main').addEventListener('keyup', function (k) {
         k.preventDefault();
-        newTaskTitle = taskInput.value
+        let newTaskTitle = taskInput.value
         if (k.key === 'Enter' && taskInput.value.length > 0) {
           setTaskValue("title", newTaskTitle)
-
+          
           taskInput.classList.add('hide')
 
           let taskTitle = document.querySelector('.task-title .title')
