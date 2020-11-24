@@ -12,6 +12,8 @@ const initUI = (projects) => {
   const addProject = document.querySelector('.add-project')
   const projectForm = document.querySelector('.new-project-form')
   const closeProjectEdit = document.querySelector('.close-project-edit')
+  let projectToDelIndex = false
+  let deleteConfirm = document.querySelector('.confirm-delete')
 
   addProject.addEventListener('click', () => {
     projectForm.classList.toggle('hide')
@@ -77,19 +79,35 @@ const initUI = (projects) => {
       const task = projects[projIndex]["tasks"][taskIndex]
       task.completed = e.target.checked
       let taskPara = e.target.parentNode.querySelector('p')
-      if(task.completed){
+      if (task.completed) {
         taskPara.classList.add('linethrough')
-      }else{
+      } else {
         taskPara.classList.remove('linethrough')
       }
     }
 
-    // delete project button
-    if (matchTarget(e, 'i.del-project')) {
-      // TODO : Add confirmation
-      const delIndex = e.target.parentNode.getAttribute('p-index')
-      projects.splice(delIndex, 1)
+    // variable to track project deletion
 
+
+    // delete project confirmation
+    if (matchTarget(e, 'i.del-project')) {
+      projectToDelIndex = e.target.parentNode.getAttribute('p-index')
+      deleteConfirm.classList.remove('hide')
+      console.log(projectToDelIndex)
+    }
+
+    // confirm project deletion
+
+    if (matchTarget(e, '.delete-project-no')) {
+      projectToDelIndex = false
+      deleteConfirm.classList.add('hide')
+    }
+
+    // delete on confirmation
+    if (matchTarget(e, '.delete-project-yes')) {
+      projects.splice(projectToDelIndex, 1)
+      projectToDelIndex = false
+      deleteConfirm.classList.add('hide')
       display.showProjects(projects)
     }
 
@@ -210,7 +228,7 @@ const initUI = (projects) => {
         let newTaskTitle = taskInput.value
         if (k.key === 'Enter' && taskInput.value.length > 0) {
           setTaskValue("title", newTaskTitle)
-          
+
           taskInput.classList.add('hide')
 
           let taskTitle = document.querySelector('.task-title .title')
@@ -255,21 +273,7 @@ const initUI = (projects) => {
 
     if (matchTarget(e, '.task-priority input[name="taskPriority"]')) {
       setTaskValue("priority", e.target.value)
-       
-      console.log(taskPara)
-      switch(e.target.value){
-        case "High":
-          taskPara.style.color ="green"
-        break;
-        case "Medium":
-          taskPara.style.color ="blue"
-        break;
-        case "Low":
-          taskPara.style.color ="red"
-        break;
-        default :
-          taskDiv.style.color = "inherit"
-      }
+
     }
 
     // close task edit
