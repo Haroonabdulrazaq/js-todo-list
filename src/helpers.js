@@ -58,4 +58,4 @@ const helpr = (() => {
   };
 })();
 
-export default helpr;
+module.exports = helpr;
