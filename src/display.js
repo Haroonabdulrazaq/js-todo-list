@@ -71,4 +71,4 @@ const display = (() => {
   return { showProjects };
 })();
 
-export default display;
+module.exports = display;
