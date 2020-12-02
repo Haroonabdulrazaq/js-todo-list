@@ -61,3 +61,10 @@ describe('CreateTag function', () => {
     expect(helpr.createTag('ul')).not.toBeNull()
   })
 })
+
+describe('nth parent works as expected', () => {
+  document.body.innerHTML = '<div id="greatgrandparent"><div id="grandparent"><div id="parent"><div id="child"></div></div></div></div>';
+  const child = document.getElementById('child')
+  const ggp = document.getElementById('greatgrandparent')
+  expect(helpr.nthParent(child, 3)).toMatchObject(ggp)
+})
