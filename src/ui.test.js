@@ -5,9 +5,3 @@ test('map calls its argument with a non-null argument', () => {
   [1].map(x => initUI(x));
   expect(initUI).toBeCalledWith(expect.anything());
 });
-
-test('map calls its argument with a non-null arg', ()=>{
-  const initUI = jest.fn();
-  [1].map(x=> initUI(x));
-  expect(initUI).toBeCalledWith(expect.anything());
-})
