@@ -35,7 +35,6 @@ const initUI = (projects) => {
     }
   });
 
-
   // task interface
 
   const taskModal = document.querySelector('.edit-task');
@@ -51,7 +50,6 @@ const initUI = (projects) => {
       const [projIndex, taskIndex] = [...taskIndicies];
       projects[projIndex].tasks[taskIndex][taskKey] = taskValue;
     };
-
 
     if (matchTarget(e, '.description-submit') && taskTextArea.value.length > 0) {
       setTaskValue('description', taskTextArea);
@@ -79,7 +77,6 @@ const initUI = (projects) => {
     }
 
     // variable to track project deletion
-
 
     // delete project confirmation
     if (matchTarget(e, 'i.del-project')) {
@@ -120,7 +117,6 @@ const initUI = (projects) => {
       }
     }
 
-
     // submit task button
 
     if (matchTarget(e, 'input.task-submit')) {
@@ -152,7 +148,6 @@ const initUI = (projects) => {
 
     // edit task
 
-
     // show/hide task modal
 
     if (matchTarget(e, '.task-div p') || matchTarget(e, '.task-div .fa-edit')) {
@@ -164,10 +159,8 @@ const initUI = (projects) => {
       const taskDesc = document.querySelector('.task-description p');
       const taskDescInput = document.querySelector('.task-description textarea');
 
-
       taskModal.classList.toggle('hide');
       taskModal.setAttribute('pt-indices', `${projIndex}, ${taskIndex}`);
-
 
       if (task.description.length > 0) {
         taskDescInput.classList.add('hide');
@@ -178,7 +171,6 @@ const initUI = (projects) => {
         taskDescInput.value = '';
         taskDesc.innerHTML = '';
       }
-
 
       if (task.priority) {
         document.querySelector(`input#${task.priority}`).click();
@@ -221,14 +213,12 @@ const initUI = (projects) => {
           const taskTitle = document.querySelector('.task-title .title');
           taskTitle.innerHTML = `Task: ${newTaskTitle}`;
 
-
           display.showProjects(projects);
         }
       });
     }
 
     // set task description
-
 
     if (matchTarget(e, '.task-textarea')) {
       document.querySelector('main').addEventListener('keyup', (k) => {
@@ -260,7 +250,6 @@ const initUI = (projects) => {
       taskTextArea.value = '';
     }
 
-
     // set task-priority
 
     if (matchTarget(e, '.task-priority input[name="taskPriority"]')) {
@@ -284,4 +273,4 @@ const initUI = (projects) => {
   });
 };
 
-export default initUI;
+module.exports = initUI;

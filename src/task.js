@@ -9,4 +9,4 @@ const newTask = (title, description = '', dueDate = '', priority = '', completed
   project,
 });
 
-export default newTask;
+module.exports = newTask;
