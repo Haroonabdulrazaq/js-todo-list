@@ -1,6 +1,7 @@
 const initUI = require('./ui')
 const newProject = require('./project')
 const display = require('./display')
+const newTask = require('./task')
 
 describe('should add a new project to the UI', () => {
   document.body.innerHTML = `<main class="main">
@@ -59,14 +60,30 @@ describe('should add a new project to the UI', () => {
 
   let projects = []
   let testProject = newProject('test project')
+  let testTask = newTask('task1')
+  testProject.tasks.push(testTask)
   projects.push(testProject)
   initUI(projects)
 
   display.showProjects(projects)
 
-  let pro = document.querySelector('.project').querySelector('h3')
+  let projTitle = document.querySelector('.project').querySelector('h3')
 
   test('test project shows in UI', () => {
-    expect(pro.innerHTML).toBe('test project')
+    expect(projTitle.innerHTML).toBe('test project')
   })
+
+  let taskTitle = document.querySelector('.task-item p')
+
+  test('test task shows in UI', () => {
+    expect(taskTitle.innerHTML).toBe('task1')
+  })
+
+  // click checkbox 
+  document.querySelector('.task-checkbox').click()
+
+  test('task completion on click alters task object', () => {
+    expect(projects[0].tasks[0].completed).toEqual(true)
+  })
+
 })
