@@ -6,7 +6,7 @@ test('map calls its argument with a non-null argument', () => {
   expect(initUI).toBeCalledWith(expect.anything());
 });
 
-test('It should hide the project form on click',()=>{
+test('It should hide the project form on click', () => {
 
   document.body.innerHTML = `<button class ='add-project'>Add Project</button>
                               <form class='new-project-form hide'></form>`
@@ -17,7 +17,7 @@ test('It should hide the project form on click',()=>{
   expect(projectForm.innerHTML).toBe(``)
 })
 
-test('It should hide the project form on click',()=>{
+test('It should hide the project form on click', () => {
 
   document.body.innerHTML = `<button class ='close-project'>x</button>
                               <form class='new-project-form hide'></form>`
@@ -27,3 +27,8 @@ test('It should hide the project form on click',()=>{
   closeProject.click();
   expect(projectForm.innerHTML).toBe(``)
 })
+
+test('initUI is defined', () => {
+  expect(initUI).toBeDefined()
+})
+
