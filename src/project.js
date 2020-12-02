@@ -5,4 +5,4 @@ const newProject = (title) => ({
   tasks: [],
 });
 
-module.exports =  newProject;
+module.exports = newProject;

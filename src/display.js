@@ -27,7 +27,6 @@ const display = (() => {
     textIn.setAttribute('placeholder', 'Enter a new task here + ENTER to save');
     textIn.setAttribute('type', 'text');
 
-
     const taskSubmit = helpr.createTag('input', 'task-submit button mt-4 is-info');
     taskSubmit.setAttribute('type', 'submit');
     taskSubmit.setAttribute('value', 'Add Task');
@@ -36,7 +35,6 @@ const display = (() => {
     helpr.addChildren(taskDiv, [taskList, taskForm]);
     helpr.addChildren(projDiv, [projectTitle, editInput, projectEdit, projectDel, taskDiv]);
     projectList.appendChild(projDiv);
-
 
     project.tasks.forEach((el) => {
       const taskItem = helpr.createTag('li', 'task-item');
