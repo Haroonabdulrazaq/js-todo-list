@@ -6,7 +6,7 @@ test('map calls its argument with a non-null argument', () => {
   expect(initUI).toBeCalledWith(expect.anything());
 });
 
-test('It shoukd hide the project form on click',()=>{
+test('It should hide the project form on click',()=>{
 
   document.body.innerHTML = `<button class ='add-project'>Add Project</button>
                               <form class='new-project-form hide'></form>`
@@ -14,5 +14,16 @@ test('It shoukd hide the project form on click',()=>{
   const addProject = document.querySelector('.add-project');
   const projectForm = document.querySelector('.new-project-form');
   addProject.click();
+  expect(projectForm.innerHTML).toBe(``)
+})
+
+test('It should hide the project form on click',()=>{
+
+  document.body.innerHTML = `<button class ='close-project'>x</button>
+                              <form class='new-project-form hide'></form>`
+
+  const closeProject = document.querySelector('.close-project');
+  const projectForm = document.querySelector('.new-project-form');
+  closeProject.click();
   expect(projectForm.innerHTML).toBe(``)
 })
