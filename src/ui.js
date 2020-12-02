@@ -284,4 +284,4 @@ const initUI = (projects) => {
   });
 };
 
-export default initUI;
+module.exports = initUI;
